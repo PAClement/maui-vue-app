@@ -52,7 +52,7 @@
         <div class="flex-[3] gap-3 flex flex-col justify-between">
           <div class="flex-[9] bg-white shadow-lg rounded-lg"></div>
           <div class="flex-[1] bg-white shadow-lg rounded-lg">
-            <button
+            <button @click="modalConfirmCart = true"
                 class="bg-green-500 rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl cursor-pointer h-full w-full">
               <font-awesome-icon icon="cart-shopping"/>
               Confirmer panier
@@ -73,6 +73,20 @@
             <h2 class="text-gray-500 text-center">
               <span class="font-bold text-lg">Patientez...</span><br><br> <span class="text-md">Un de nos agents va arriver.</span>
             </h2>
+          </div>
+        </DialogPanel>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+  <TransitionRoot appear :show="modalConfirmCart" as="template">
+    <Dialog as="div" class="relative z-50" @close="modalConfirmCart = false">
+      <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
+      <div class="fixed inset-0 flex items-center justify-center p-4">
+        <DialogPanel
+            class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white py-6 px-5 text-left shadow-xl transition-all">
+          <div class="flex flex-col items-center justify-center gap-5">
+            <img src="../../assets/img/tpe.png" alt="logo" class="w-40 h-40">
+            <h2 class="text-center text-lg text-gray-500">Veuillez suivre les informations sur le terminal de paiement</h2>
           </div>
         </DialogPanel>
       </div>
