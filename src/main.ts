@@ -1,0 +1,43 @@
+import {createApp, h} from "vue";
+import App from "./App.vue";
+
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import {createRouter, createWebHistory} from "vue-router";
+import {routes} from "./routes.js";
+
+import './index.css'
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
+/*
+    Wait for the webview to load Blazor Framework and start it if needed
+*/
+if (window.hasOwnProperty("DotNet")) {
+    new Promise(r => setTimeout(r, 100)).then(() => {
+        try {
+            window.DotNet.invokeMethod("", "");
+        } catch (error: any) {
+            if (error.message.includes("No call dispatcher")) {
+                window.Blazor.start();
+            }
+        }
+    });
+}
+import {faXmark, faWarning, faCartShopping, faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import {faBell} from '@fortawesome/free-regular-svg-icons'
+
+
+library.add(faXmark, faWarning, faCartShopping, faTrashCan);
+
+const app = createApp({
+    setup: () => {
+    },
+    render: () => h(App)
+});
+app.use(router).component('font-awesome-icon', FontAwesomeIcon)
+    .mount("#app");
+

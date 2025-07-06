@@ -1,0 +1,8 @@
+@import '../assets/css/fonts.css';
+@import "tailwindcss";
+
+@layer base {
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+}
