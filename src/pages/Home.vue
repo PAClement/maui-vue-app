@@ -16,7 +16,7 @@
         <button class="cursor-pointer" @click="isOpen = true">
           <img src="../../assets/img/flags/fr.png" alt="logo" class="w-16 h-16">
         </button>
-        <button class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
+        <button @click="modalAskHelp = true" class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
               <span class="flex items-center gap-8">
                 <font-awesome-icon icon="warning" class="text-red-400 text-2xl"/>
                 Ask for Help
@@ -52,6 +52,22 @@
       </div>
     </Dialog>
   </TransitionRoot>
+  <TransitionRoot appear :show="modalAskHelp" as="template">
+    <Dialog as="div" class="relative z-50" @close="modalAskHelp = false">
+      <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
+      <div class="fixed inset-0 flex items-center justify-center p-4">
+        <DialogPanel
+            class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
+          <div class="flex flex-col justify-center items-center gap-5">
+            <font-awesome-icon icon="warning" class="text-6xl text-red-400 cursor-pointer"/>
+            <h2 class="text-gray-500 text-center">
+              <span class="font-bold text-lg">Patientez...</span><br><br> <span class="text-md">Un de nos agents va arriver.</span>
+            </h2>
+          </div>
+        </DialogPanel>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script setup lang="ts">
@@ -61,6 +77,7 @@ import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
 const isOpen = ref(false);
+const modalAskHelp = ref(false);
 
 const currentFlag = ref('fr');
 
