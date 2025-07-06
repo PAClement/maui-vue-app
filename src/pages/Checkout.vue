@@ -8,7 +8,7 @@
               <RouterLink to="/">
                 <span class="flex items-center gap-8">
                   <font-awesome-icon icon="xmark" class="text-red-400 text-2xl"/>
-                  Cancel the payment
+                  Annuler le panier
                 </span>
               </RouterLink>
             </button>
@@ -21,7 +21,7 @@
                     class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
               <span class="flex items-center gap-8">
                 <font-awesome-icon icon="warning" class="text-red-400 text-2xl"/>
-                Ask for Help
+                Demander de l'aide
               </span>
             </button>
           </div>
@@ -31,8 +31,8 @@
         <div class="flex-[7] flex flex-col bg-white shadow-lg rounded-lg p-3">
           <div class="flex-[9]">
             <div class="flex items-center justify-between">
-              <span class="text-3xl font-bold text-gray-500">Cart</span>
-              <span class="text-lg font-bold text-gray-500">3 ITEM(S)</span>
+              <span class="text-3xl font-bold text-gray-500">Panier</span>
+              <span class="text-lg font-bold text-gray-500">3 ARTICLES</span>
             </div>
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex flex-col gap-3">
@@ -55,7 +55,7 @@
             <button
                 class="bg-green-500 rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl cursor-pointer h-full w-full">
               <font-awesome-icon icon="cart-shopping"/>
-              Confirm my cart
+              Confirmer panier
             </button>
           </div>
         </div>

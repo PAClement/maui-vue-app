@@ -6,7 +6,7 @@
       </div>
       <div class="flex-[6] flex justify-center items-baseline">
         <div class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full">
-          <h2 class="text-center text-gray-500 font-bold text-lg">Scan an item <br> to begin</h2>
+          <h2 class="text-center text-gray-500 font-bold text-lg">Scannez un item<br> pour commencer</h2>
           <RouterLink to="/checkout">
             <img src="../../assets/img/barcode.svg" alt="logo" class="w-40 h-40">
           </RouterLink>
@@ -19,7 +19,7 @@
         <button @click="modalAskHelp = true" class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
               <span class="flex items-center gap-8">
                 <font-awesome-icon icon="warning" class="text-red-400 text-2xl"/>
-                Ask for Help
+                Demander de l'aide
               </span>
         </button>
       </div>
