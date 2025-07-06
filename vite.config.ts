@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig((config: ConfigEnv) => {
-    const outDir: string = "../BlazorMaui.Core/wwwroot";
+    const outDir: string = "../Luxtpv.WebKiosk.BlazorMaui.Core/wwwroot";
     return {
         plugins: [
             vue(),

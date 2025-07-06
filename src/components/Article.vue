@@ -17,8 +17,22 @@
         <div class="fixed inset-0 flex items-center justify-center p-4">
           <DialogPanel
               class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
-            <div class="flex justify-center items-center gap-3">
-              <font-awesome-icon icon="trash-can" class="text-2xl text-red-500 cursor-pointer"/>
+            <div class="flex flex-col justify-center items-center gap-5">
+              <font-awesome-icon icon="trash-can" class="text-3xl text-red-500 cursor-pointer"/>
+              <h2 class="text-lg text-gray-500">Voulez-vous supprimez cette article ?</h2>
+              <small class="mb-5 text-gray-500 font-bold">Product {{product}}</small>
+              <div class="flex gap-5">
+                <button @click="modalRemoveItem = false" class="bg-white shadow-md rounded-lg px-4 py-2 text-md font-bold text-gray-500 cursor-pointer">
+                <span class="flex items-center gap-8">
+                  Annuler
+                </span>
+                </button>
+                <button class="bg-red-500 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer">
+                <span class="flex items-center gap-8">
+                  Confirmer
+                </span>
+                </button>
+              </div>
             </div>
           </DialogPanel>
         </div>
