@@ -5,6 +5,11 @@
     <button @click="setValue">Set Value to 100</button>
 
     <pre>{{ result }}</pre>
+    <br>
+    <br>
+    <button @click="loadInfo">LoadInfo</button>
+
+    <pre v-if="loaded">{{simpleObj}}</pre>
   </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
@@ -109,7 +114,25 @@ const increment = async () => {
 const setValue = async () => {
   await BlazorBridge.call('Counter', 'SetValue', 100);
 }
+const simpleObj = ref('loading...');
+const loaded = ref(false)
 
+function loadInfo() {
+  console.log("Button Clicked !!");
+  if (window.hasOwnProperty("DotNet")) {
+    loaded.value = true;
+    console.log("Calling GetSystemInfo");
+    window.DotNet.invokeMethodAsync("BlazorMaui.Core", "GetSystemInfo").then((out: any) => {
+      console.log("Got System Info");
+      if (typeof out != undefined) {
+        simpleObj.value = out;
+      }
+    });
+  }
+  else {
+    loaded.value = true;
+  }
+}
 // onMounted(() => {
 //   if (window.hasOwnProperty("DotNet")) {
 //     window.DotNet.invokeMethodAsync("BlazorMaui.Core", "loadProducts").then((out: any) => {
