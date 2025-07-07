@@ -22,5 +22,12 @@
 
 <script setup lang="ts">
 
-import Button from "@/tools/Button.vue";
+const addDigit = (digit: number) => {
+};
+
+const clearCode = () => {
+};
+
+const removeLast = () => {
+};
 </script>
