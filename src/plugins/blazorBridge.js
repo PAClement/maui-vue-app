@@ -15,7 +15,10 @@ export class BlazorBridge {
 
             return JSON.parse(responseJson);
         } catch (error) {
-            return { success: false, error: error.message };
+            return {
+                success: false,
+                error: error.message
+            };
         }
     }
 }
