@@ -16,12 +16,8 @@
         <button class="cursor-pointer" @click="isOpen = true">
           <img src="../../assets/img/flags/fr.png" alt="logo" class="w-16 h-16">
         </button>
-        <button @click="modalAskHelp = true" class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
-              <span class="flex items-center gap-8">
-                <font-awesome-icon icon="warning" class="text-red-400 text-2xl"/>
-                Demander de l'aide
-              </span>
-        </button>
+        <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
+                iconColor="text-red-400"/>
       </div>
     </div>
   </section>
@@ -42,11 +38,7 @@
             </div>
           </div>
           <div class="flex items-center justify-center">
-            <button @click="isOpen = false" class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
-                <span class="flex items-center gap-8">
-                  Annuler
-                </span>
-            </button>
+            <Button @click="isOpen = false" text="Annuler"/>
           </div>
         </DialogPanel>
       </div>
@@ -71,8 +63,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
+import Button from "../tools/Button.vue";
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
@@ -88,6 +81,16 @@ const flags_list = computed(() => {
 const getFlagSrc = (flag: string) => {
   return new URL(`../../assets/img/flags/${flag}.png`, import.meta.url).href
 }
+
+onMounted(() => {
+  if (window.hasOwnProperty("DotNet")) {
+    window.DotNet.invokeMethodAsync("Luxtpv.WebKiosk.BlazorMaui.Core", "loadProducts").then((out: any) => {
+      console.log("Got System Info");
+      console.log(out);
+    });
+  }
+})
+
 </script>
 
 <style scoped>
