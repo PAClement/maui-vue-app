@@ -1,7 +1,9 @@
 <template>
   <div>
-    <button @click="getSystemInfo">System Info</button><br>
-    <button @click="increment">Increment</button><br>
+    <button @click="getSystemInfo">System Info</button>
+    <br>
+    <button @click="increment">Increment</button>
+    <br>
     <button @click="setValue">Set Value to 100</button>
 
     <pre>{{ result }}</pre>
@@ -95,10 +97,14 @@ const handleProduct = (payload: any) => {
   console.log(payload)
 };
 
-const result = ref(null);
+const result = ref();
 
+type Product = {
+  id: number;
+  barcode: string;
+};
 const getSystemInfo = async () => {
-  result.value = await BlazorBridge.call('System', 'GetSystemInfoAsync')
+  result.value = await BlazorBridge.call<Product>('System', 'GetProduct', 1, '1234567890');
 }
 
 const increment = async () => {
