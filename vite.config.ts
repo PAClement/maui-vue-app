@@ -2,6 +2,7 @@ import { ConfigEnv, defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { copyAssetsPlugin, addFrameworkPlugin } from "./vite.plugins";
 import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath, URL } from "node:url"
 
 // https://vitejs.dev/config/
 export default defineConfig((config: ConfigEnv) => {
@@ -13,6 +14,11 @@ export default defineConfig((config: ConfigEnv) => {
             copyAssetsPlugin(outDir),
             addFrameworkPlugin(config.mode === "production")
         ],
+        resolve: {
+            alias: {
+                "@": fileURLToPath(new URL("./src", import.meta.url))
+            }
+        },
         build: {
             emptyOutDir: true,
             outDir: outDir,
