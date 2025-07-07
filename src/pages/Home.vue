@@ -89,7 +89,7 @@ const handleProduct = (payload: any) => {
 
 onMounted(() => {
   if (window.hasOwnProperty("DotNet")) {
-    window.DotNet.invokeMethodAsync("Luxtpv.WebKiosk.BlazorMaui.Core", "loadProducts").then((out: any) => {
+    window.DotNet.invokeMethodAsync("BlazorMaui.Core", "loadProducts").then((out: any) => {
       console.log("Got System Info");
       console.log(out);
     });
