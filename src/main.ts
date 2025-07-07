@@ -27,19 +27,22 @@ window.handleProductFromDotNet = (product: any) => {
 /*
     Wait for the webview to load Blazor Framework and start it if needed
 */
-// if (window.hasOwnProperty("DotNet")) {
-//     new Promise(r => setTimeout(r, 100)).then(() => {
-//         try {
-//             console.log('load Dotnet OK')
-//             window.DotNet.invokeMethod("", "");
-//         } catch (error: any) {
-//             console.log('error loading Dotnet')
-//             if (error.message.includes("No call dispatcher")) {
-//                 window.Blazor.start();
-//             }
-//         }
-//     });
-// }
+if (window.hasOwnProperty("DotNet")) {
+    console.log('Dotnet found, Blazor loaded')
+    new Promise(r => setTimeout(r, 100)).then(() => {
+        try {
+            console.log('load Dotnet OK')
+            window.DotNet.invokeMethod("", "");
+        } catch (error: any) {
+            console.log('error loading Dotnet')
+            if (error.message.includes("No call dispatcher")) {
+                window.Blazor.start();
+            }
+        }
+    });
+}else{
+    console.log('Dotnet not found, Blazor not loaded')
+}
 import {
     faXmark,
     faWarning,
