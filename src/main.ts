@@ -40,11 +40,11 @@ if (window.hasOwnProperty("DotNet")) {
         }
     });
 }
-import {faXmark, faWarning, faCartShopping, faTrashCan, faBan} from '@fortawesome/free-solid-svg-icons'
+import {faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import {faBell} from '@fortawesome/free-regular-svg-icons'
 
 
-library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan);
+library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft);
 
 const app = createApp({
     setup: () => {
