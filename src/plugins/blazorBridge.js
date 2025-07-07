@@ -9,7 +9,7 @@ export class BlazorBridge {
         try {
             const responseJson = await window.DotNet.invokeMethodAsync(
                 'BlazorMaui.Core',
-                'HandleJSRequest',
+                'HandleJsRequest',
                 JSON.stringify(request)
             );
 
