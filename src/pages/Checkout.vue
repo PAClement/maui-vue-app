@@ -9,7 +9,7 @@
             </RouterLink>
           </div>
           <div class="flex-[3] flex justify-center²">
-            <img src="@/../assets/img/logo.png" alt="logo">
+            <img src="@/../assets/img/logo.svg" alt="logo">
           </div>
           <div class="flex-[3]  flex justify-end">
             <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
@@ -43,7 +43,7 @@
           </div>
           <div class="flex-[1] bg-white shadow-lg rounded-lg">
             <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
-              ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl h-full w-full'"
+              ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-2xl h-full w-full'"
                     :iconSide="globalButton.iconSide" :icon="globalButton.icon" :iconColor="globalButton.iconColor"/>
           </div>
         </div>
@@ -149,7 +149,7 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
     action: 'prev',
   },
   paymentMethod: {
-    text: 'Retour',
+    text: 'Annuler la transaction',
     icon: 'arrow-left',
     bgColor: 'bg-red-500',
     iconColor: 'text-white',

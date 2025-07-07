@@ -1,16 +1,13 @@
 <template>
   <div class="flex flex-col items-center justify-between h-full py-20">
     <h2 class="text-2xl font-bold text-gray-500">Vous avez un compte de fidélité ?</h2>
-    <div class="flex flex-col gap-5">
-      <Button @click="modalLoyaltyAccount = true" text="J'ai déjà mon compte !" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-            gap-16 px-12 py-4 font-bold text-white text-2xl cursor-pointer " iconSide="left"
+    <div>
+      <Button @click="modalLoyaltyAccount = true" text="Associer mon compte" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
+            gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
               icon="qrcode" iconColor="text-white"/>
-      <Button text="Créer ma carte" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-            gap-16 px-12 py-4 font-bold text-white text-2xl cursor-pointer " iconSide="left"
-              icon="plus" iconColor="text-white"/>
     </div>
     <Button @click="$emit('next')" text="Non, merci" buttonClass="bg-gray-500 shadow-md rounded-lg flex items-center
-            gap-16 px-12 py-4 font-bold text-white text-2xl cursor-pointer " iconSide="left"
+            gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
             icon="ban" iconColor="text-white"/>
   </div>
   <TransitionRoot appear :show="modalLoyaltyAccount" as="template">
