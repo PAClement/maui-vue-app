@@ -18,6 +18,7 @@ const router = createRouter({
     Wait for the webview to load Blazor Framework and start it if needed
 */
 if (window.hasOwnProperty("DotNet")) {
+    console.log('Dotnet is already loaded');
     new Promise(r => setTimeout(r, 100)).then(() => {
         try {
             console.log('load Dotnet OK')
@@ -29,6 +30,8 @@ if (window.hasOwnProperty("DotNet")) {
             }
         }
     });
+}else{
+    console.log('Dotnet is not loaded, waiting for it to load');
 }
 import {
     faXmark,
