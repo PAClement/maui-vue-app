@@ -4,8 +4,8 @@ import App from "./App.vue";
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {createRouter, createWebHistory} from "vue-router";
-import {routes} from "./routes.js";
-import {eventBus} from "./plugins/eventBus.js";
+import {routes} from "@/routes.js";
+import {eventBus} from "@/plugins/eventBus.js";
 
 import './index.css'
 
