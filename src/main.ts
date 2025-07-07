@@ -5,7 +5,6 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {createRouter, createWebHistory} from "vue-router";
 import {routes} from "@/routes.js";
-import {eventBus} from "@/plugins/eventBus.js";
 
 import './index.css'
 
@@ -14,22 +13,6 @@ const router = createRouter({
     routes
 })
 
-/*
-    Wait for the webview to load Blazor Framework and start it if needed
-*/
-if (window.hasOwnProperty("DotNet")) {
-    new Promise(r => setTimeout(r, 100)).then(() => {
-        try {
-            console.log('load Dotnet OK')
-            window.DotNet.invokeMethod("", "");
-        } catch (error: any) {
-            console.log('error loading Dotnet')
-            if (error.message.includes("No call dispatcher")) {
-                window.Blazor.start();
-            }
-        }
-    });
-}
 import {
     faXmark,
     faWarning,
@@ -40,10 +23,12 @@ import {
     faQrcode,
     faPlus,
     faCircleCheck,
-    faCreditCard
+    faCreditCard,
+    faGift,
+    faCrown
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft, faQrcode, faPlus, faCircleCheck, faCreditCard);
+library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft, faQrcode, faPlus, faCircleCheck, faCreditCard, faGift, faCrown);
 
 const app = createApp({
     setup: () => {
