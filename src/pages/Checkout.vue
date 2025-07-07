@@ -5,7 +5,7 @@
         <div class="flex items-center justify-between mb-3 h-full w-full ">
           <div class="flex-[3]">
             <RouterLink to="/">
-              <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-400"/>
+              <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-500"/>
             </RouterLink>
           </div>
           <div class="flex-[3] flex justify-center²">
@@ -13,7 +13,7 @@
           </div>
           <div class="flex-[3]  flex justify-end">
             <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
-                    iconColor="text-red-400"/>
+                    iconColor="text-red-500"/>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <DialogPanel
             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
           <div class="flex flex-col justify-center items-center gap-5">
-            <font-awesome-icon icon="warning" class="text-6xl text-red-400 cursor-pointer"/>
+            <font-awesome-icon icon="warning" class="text-6xl text-red-500 cursor-pointer"/>
             <h2 class="text-gray-500 text-center">
               <span class="font-bold text-lg">Patientez...</span><br><br> <span class="text-md">Un de nos agents va arriver.</span>
             </h2>
@@ -133,7 +133,7 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
   bag: {
     text: 'Retour',
     icon: 'arrow-left',
-    bgColor: 'bg-red-400',
+    bgColor: 'bg-red-500',
     iconColor: 'text-white',
     iconSide: 'left',
     action: 'prev',
@@ -141,7 +141,7 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
   loyalty: {
     text: 'Retour',
     icon: 'arrow-left',
-    bgColor: 'bg-red-400',
+    bgColor: 'bg-red-500',
     iconColor: 'text-white',
     iconSide: 'left',
     action: 'prev',
