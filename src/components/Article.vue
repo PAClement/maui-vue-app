@@ -40,7 +40,7 @@ import Button from "../tools/Button.vue";
 
 const props = defineProps({
   product: String,
-  price: Number,
+  price: String,
   refProduct: String
 })
 
