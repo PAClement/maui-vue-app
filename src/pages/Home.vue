@@ -17,7 +17,7 @@
           <img src="@/../assets/img/flags/fr.png" alt="logo" class="w-16 h-16">
         </button>
         <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
-                iconColor="text-red-400"/>
+                iconColor="text-red-500"/>
       </div>
     </div>
   </section>
@@ -51,7 +51,7 @@
         <DialogPanel
             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
           <div class="flex flex-col justify-center items-center gap-5">
-            <font-awesome-icon icon="warning" class="text-6xl text-red-400 cursor-pointer"/>
+            <font-awesome-icon icon="warning" class="text-6xl text-red-500 cursor-pointer"/>
             <h2 class="text-gray-500 text-center">
               <span class="font-bold text-lg">Patientez...</span><br><br> <span class="text-md">Un de nos agents va arriver.</span>
             </h2>
