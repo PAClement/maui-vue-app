@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="flex items-center gap-5">
-      <span class="font-bold text-xl">{{ props.price ?? 0 }} €</span>
+      <span class="font-bold text-xl text-gray-700">{{ props.price ?? 0 }} €</span>
       <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true"/>
     </div>
     <TransitionRoot appear :show="modalRemoveItem" as="template">
