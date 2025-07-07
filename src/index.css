@@ -1,6 +1,20 @@
 @import '../assets/css/fonts.css';
 @import "tailwindcss";
 
+@theme {
+    --color-primary-50: #F7FCFF;
+    --color-primary-100: #EDF5FC;
+    --color-primary-200: #D2E5FA;
+    --color-primary-300: #B8D1F5;
+    --color-primary-400: #85A2ED;
+    --color-primary-500: #556EE6;
+    --color-primary-600: #445BCF;
+    --color-primary-700: #3042AB;
+    --color-primary-800: #1E2D8A;
+    --color-primary-900: #111B66;
+    --color-primary-950: #070D42;
+}
+
 @layer base {
     * {
         font-family: 'Poppins', sans-serif;
