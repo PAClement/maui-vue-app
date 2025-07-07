@@ -8,7 +8,7 @@
               <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-500"/>
             </RouterLink>
           </div>
-          <div class="flex-[3] flex justify-center²">
+          <div class="flex-[3] flex justify-center">
             <img src="@/../assets/img/logo.svg" alt="logo">
           </div>
           <div class="flex-[3]  flex justify-end">
