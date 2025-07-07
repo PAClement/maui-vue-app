@@ -42,8 +42,8 @@
             <component :is="currentComponent" @next="nextStep"/>
           </div>
           <div class="flex-[1] bg-white shadow-lg rounded-lg">
-            <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="[globalButton.bgColor,
-                    'rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl h-full w-full']"
+            <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
+              ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl h-full w-full'"
                     :iconSide="globalButton.iconSide" :icon="globalButton.icon" :iconColor="globalButton.iconColor"/>
           </div>
         </div>
@@ -78,10 +78,11 @@ import Bag from "@/components/StepSideCheckout/Bag.vue";
 import Cart from "@/components/StepSideCheckout/Cart.vue";
 import Loyalty from "@/components/StepSideCheckout/Loyalty.vue";
 import {ButtonConfig} from "@/interface";
+import PaymentMethod from "@/components/StepSideCheckout/PaymentMethod.vue";
 
 const modalAskHelp = ref(false);
 
-const steps = ['cart', 'bag', 'loyalty'] as const;
+const steps = ['cart', 'bag', 'loyalty', 'paymentMethod'] as const;
 type Step = typeof steps[number];
 
 const currentStep = ref<Step>('cart');
@@ -89,6 +90,7 @@ const stepComponentMap = {
   cart: Cart,
   bag: Bag,
   loyalty: Loyalty,
+  paymentMethod: PaymentMethod
 };
 
 const currentComponent = computed(() => stepComponentMap[currentStep.value]);
@@ -114,7 +116,7 @@ const handleAction = () => {
       prevStep();
       break;
     case 'custom':
-      console.log("Action personnalisée");
+
       break;
   }
 }
@@ -139,6 +141,14 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
     action: 'prev',
   },
   loyalty: {
+    text: 'Retour',
+    icon: 'arrow-left',
+    bgColor: 'bg-red-500',
+    iconColor: 'text-white',
+    iconSide: 'left',
+    action: 'prev',
+  },
+  paymentMethod: {
     text: 'Retour',
     icon: 'arrow-left',
     bgColor: 'bg-red-500',
