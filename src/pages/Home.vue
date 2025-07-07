@@ -73,7 +73,7 @@
 import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
-import {BlazorBridge} from '@/plugins/blazorBridge.js';
+import {BlazorBridge} from '@/plugins/blazorBridge';
 
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
