@@ -110,19 +110,19 @@ const setValue = async () => {
   await BlazorBridge.call('Counter', 'SetValue', 100);
 }
 
-onMounted(() => {
-  if (window.hasOwnProperty("DotNet")) {
-    window.DotNet.invokeMethodAsync("BlazorMaui.Core", "loadProducts").then((out: any) => {
-      console.log("Got System Info");
-      console.log(out);
-    });
-  }
-  eventBus.on('product:received', handleProduct);
-})
-
-onUnmounted(() => {
-  eventBus.off('product:received', handleProduct);
-});
+// onMounted(() => {
+//   if (window.hasOwnProperty("DotNet")) {
+//     window.DotNet.invokeMethodAsync("BlazorMaui.Core", "loadProducts").then((out: any) => {
+//       console.log("Got System Info");
+//       console.log(out);
+//     });
+//   }
+//   eventBus.on('product:received', handleProduct);
+// })
+//
+// onUnmounted(() => {
+//   eventBus.off('product:received', handleProduct);
+// });
 
 </script>
 
