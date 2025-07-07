@@ -4,26 +4,15 @@
       <div class="flex-[1]">
         <div class="flex items-center justify-between mb-3 h-full w-full ">
           <div class="flex-[3]">
-            <button class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
-              <RouterLink to="/">
-                <span class="flex items-center gap-8">
-                  <font-awesome-icon icon="xmark" class="text-red-400 text-2xl"/>
-                  Annuler le panier
-                </span>
-              </RouterLink>
-            </button>
+            <RouterLink to="/">
+              <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-400"/>
+            </RouterLink>
           </div>
           <div class="flex-[3] flex justify-center">
             <img src="../../assets/img/logo.png" alt="logo">
           </div>
           <div class="flex-[3]  flex justify-end">
-            <button @click="modalAskHelp = true"
-                    class="bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 cursor-pointer">
-              <span class="flex items-center gap-8">
-                <font-awesome-icon icon="warning" class="text-red-400 text-2xl"/>
-                Demander de l'aide
-              </span>
-            </button>
+            <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning" iconColor="text-red-400"/>
           </div>
         </div>
       </div>
@@ -52,11 +41,8 @@
         <div class="flex-[3] gap-3 flex flex-col justify-between">
           <div class="flex-[9] bg-white shadow-lg rounded-lg"></div>
           <div class="flex-[1] bg-white shadow-lg rounded-lg">
-            <button @click="modalConfirmCart = true"
-                class="bg-green-500 rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-3xl cursor-pointer h-full w-full">
-              <font-awesome-icon icon="cart-shopping"/>
-              Confirmer panier
-            </button>
+            <Button @click="modalAskHelp = true" text="Confirmer panier" buttonClass="bg-green-500 rounded-lg flex items-center
+            gap-16 px-10 py-2 font-bold text-white text-3xl cursor-pointer h-full w-full" iconSide="left" icon="cart-shopping" iconColor="text-white"/>
           </div>
         </div>
       </div>
@@ -86,7 +72,8 @@
             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white py-6 px-5 text-left shadow-xl transition-all">
           <div class="flex flex-col items-center justify-center gap-5">
             <img src="../../assets/img/tpe.png" alt="logo" class="w-40 h-40">
-            <h2 class="text-center text-lg text-gray-500">Veuillez suivre les informations sur le terminal de paiement</h2>
+            <h2 class="text-center text-lg text-gray-500">Veuillez suivre les informations sur le terminal de
+              paiement</h2>
           </div>
         </DialogPanel>
       </div>
@@ -100,6 +87,7 @@
 import Article from "../components/Article.vue";
 import {ref} from "vue";
 import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
+import Button from "../tools/Button.vue";
 
 const modalAskHelp = ref(false);
 const modalConfirmCart = ref(false);

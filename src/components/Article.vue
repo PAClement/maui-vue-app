@@ -22,16 +22,8 @@
               <h2 class="text-lg text-gray-500">Voulez-vous supprimez cette article ?</h2>
               <small class="mb-5 text-gray-500 font-bold">Produit {{product}}</small>
               <div class="flex gap-5">
-                <button @click="modalRemoveItem = false" class="bg-white shadow-md rounded-lg px-4 py-2 text-md font-bold text-gray-500 cursor-pointer">
-                <span class="flex items-center gap-8">
-                  Annuler
-                </span>
-                </button>
-                <button class="bg-red-400 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer">
-                <span class="flex items-center gap-8">
-                  Confirmer
-                </span>
-                </button>
+                <Button @click="modalRemoveItem = false" text="Annuler"/>
+                <Button buttonClass="bg-red-400 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer" text="Confirmer" />
               </div>
             </div>
           </DialogPanel>
@@ -44,6 +36,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from "@headlessui/vue";
+import Button from "../tools/Button.vue";
 
 const props = defineProps({
   product: String,
