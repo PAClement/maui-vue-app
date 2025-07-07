@@ -19,8 +19,10 @@ const router = createRouter({
 if (window.hasOwnProperty("DotNet")) {
     new Promise(r => setTimeout(r, 100)).then(() => {
         try {
+            console.log('load Dotnet OK')
             window.DotNet.invokeMethod("", "");
         } catch (error: any) {
+            console.log('error loading Dotnet')
             if (error.message.includes("No call dispatcher")) {
                 window.Blazor.start();
             }
