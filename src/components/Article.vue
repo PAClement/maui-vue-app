@@ -9,7 +9,7 @@
     </div>
     <div class="flex items-center gap-5">
       <span class="font-bold text-xl text-gray-700">{{ props.price ?? 0 }} €</span>
-      <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true"
+      <font-awesome-icon icon="trash-can" class="text-2xl text-red-500 cursor-pointer" @click="modalRemoveItem = true"
                          v-if="displayButton"/>
     </div>
     <TransitionRoot appear :show="modalRemoveItem" as="template">
@@ -19,13 +19,13 @@
           <DialogPanel
               class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
             <div class="flex flex-col justify-center items-center gap-5">
-              <font-awesome-icon icon="trash-can" class="text-3xl text-red-400 cursor-pointer"/>
+              <font-awesome-icon icon="trash-can" class="text-3xl text-red-500 cursor-pointer"/>
               <h2 class="text-lg text-gray-500">Voulez-vous supprimez cette article ?</h2>
               <small class="mb-5 text-gray-500 font-bold">Produit {{ product }}</small>
               <div class="flex gap-5">
                 <Button @click="modalRemoveItem = false" text="Annuler"/>
                 <Button
-                    buttonClass="bg-red-400 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer"
+                    buttonClass="bg-red-500 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer"
                     text="Confirmer"/>
               </div>
             </div>
