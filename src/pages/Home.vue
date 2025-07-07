@@ -1,4 +1,11 @@
 <template>
+  <div>
+    <button @click="getSystemInfo">System Info</button><br>
+    <button @click="increment">Increment</button><br>
+    <button @click="setValue">Set Value to 100</button>
+
+    <pre>{{ result }}</pre>
+  </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
       <div class="flex-[3] flex justify-center items-center">
@@ -66,7 +73,9 @@
 import {computed, onMounted, onUnmounted, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
-import { eventBus } from '@/plugins/eventBus';
+import {eventBus} from '@/plugins/eventBus';
+import {BlazorBridge} from '@/plugins/blazorBridge.js';
+
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
@@ -86,6 +95,20 @@ const getFlagSrc = (flag: string) => {
 const handleProduct = (payload: any) => {
   console.log(payload)
 };
+
+const result = ref(null);
+
+const getSystemInfo = async () => {
+  result.value = await BlazorBridge.call('System', 'GetSystemInfoAsync')
+}
+
+const increment = async () => {
+  await BlazorBridge.call('Counter', 'Increment');
+
+}
+const setValue = async () => {
+  await BlazorBridge.call('Counter', 'SetValue', 100);
+}
 
 onMounted(() => {
   if (window.hasOwnProperty("DotNet")) {
