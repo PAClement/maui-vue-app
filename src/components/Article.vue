@@ -9,7 +9,7 @@
     </div>
     <div class="flex items-center gap-5">
       <span class="font-bold text-xl text-gray-700">{{ props.price ?? 0 }} €</span>
-      <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true"/>
+      <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true" v-if="displayButton"/>
     </div>
     <TransitionRoot appear :show="modalRemoveItem" as="template">
       <Dialog as="div" class="relative z-50" @close="modalRemoveItem = false">
@@ -41,7 +41,8 @@ import Button from "../tools/Button.vue";
 const props = defineProps({
   product: String,
   price: String,
-  refProduct: String
+  refProduct: String,
+  displayButton: Boolean,
 })
 
 const modalRemoveItem = ref(false);
