@@ -33,11 +33,13 @@
               <input
                   type="text"
                   required
+                  readonly
+                  v-model="passCode"
                   class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5"
               />
             </div>
             <div>
-              <PassCode/>
+              <PassCode @code-update="code => passCode = code"/>
             </div>
           </div>
           <div class="flex items-center justify-center mt-10">
@@ -64,5 +66,7 @@ import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
 import {ref} from "vue";
 import PassCode from "@/tools/PassCode.vue";
 
-const modalLoyaltyAccount = ref(false);
+const modalLoyaltyAccount = ref<boolean>(false);
+
+const passCode = ref<string>('');
 </script>
