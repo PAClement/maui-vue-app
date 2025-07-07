@@ -63,9 +63,10 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "../tools/Button.vue";
+import { eventBus } from '../plugins/eventBus';
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
@@ -82,6 +83,10 @@ const getFlagSrc = (flag: string) => {
   return new URL(`../../assets/img/flags/${flag}.png`, import.meta.url).href
 }
 
+const handleProduct = (payload: any) => {
+  console.log(payload)
+};
+
 onMounted(() => {
   if (window.hasOwnProperty("DotNet")) {
     window.DotNet.invokeMethodAsync("Luxtpv.WebKiosk.BlazorMaui.Core", "loadProducts").then((out: any) => {
@@ -89,7 +94,12 @@ onMounted(() => {
       console.log(out);
     });
   }
+  eventBus.on('product:received', handleProduct);
 })
+
+onUnmounted(() => {
+  eventBus.off('product:received', handleProduct);
+});
 
 </script>
 
