@@ -42,7 +42,7 @@ export const copyAssetsPlugin = (dest) => ({
     name: "Copy assets",
     enforce: "post",
     closeBundle() {
-        copyRecursiveSync("./assets", `${dest}/assets`);
+        copyRecursiveSync("./src/assets", `${dest}/assets`);
     }
 }
 );

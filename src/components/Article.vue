@@ -1,7 +1,7 @@
 <template>
   <article class="bg-white shadow-lg rounded-lg p-3 flex justify-between">
     <div class="flex items-center gap-3">
-      <img src="@/../assets/img/package-box.svg" alt="logo" class="w-14 h-14 mr-3">
+      <img src="@/assets/img/package-box.svg" alt="logo" class="w-14 h-14 mr-3">
       <div class="text-gray-500">
         <h2>Produit {{ props.product ?? 0 }} </h2>
         <small class="font-bold">Référence : {{ props.refProduct ?? 0 }}</small>

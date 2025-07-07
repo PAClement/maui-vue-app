@@ -20,7 +20,7 @@
           <Button @click="modalLoyaltyAccount = false" text="Annuler"/>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-15 mt-6 items-center">
             <div class="flex justify-center">
-              <img src="@/../assets/img/barcode.svg" alt="logo" class="w-40 h-40"/>
+              <img src="@/assets/img/barcode.svg" alt="logo" class="w-40 h-40"/>
             </div>
             <div class="flex flex-col gap-3 text-center">
               <p>

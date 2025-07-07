@@ -9,7 +9,7 @@
             </RouterLink>
           </div>
           <div class="flex-[3] flex justify-center">
-            <img src="@/../assets/img/logo.svg" alt="logo">
+            <img src="@/assets/img/logo.svg" alt="logo">
           </div>
           <div class="flex-[3]  flex justify-end">
             <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
