@@ -1,7 +1,7 @@
 <template>
   <article class="bg-white shadow-lg rounded-lg p-3 flex justify-between">
     <div class="flex items-center gap-3">
-      <img src="../../assets/img/package-box.svg" alt="logo" class="w-14 h-14 mr-3">
+      <img src="@/../assets/img/package-box.svg" alt="logo" class="w-14 h-14 mr-3">
       <div class="text-gray-500">
         <h2>Produit {{ props.product ?? 0 }} </h2>
         <small class="font-bold">Référence : {{ props.refProduct ?? 0 }}</small>
@@ -9,7 +9,8 @@
     </div>
     <div class="flex items-center gap-5">
       <span class="font-bold text-xl text-gray-700">{{ props.price ?? 0 }} €</span>
-      <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true" v-if="displayButton"/>
+      <font-awesome-icon icon="trash-can" class="text-2xl text-red-400 cursor-pointer" @click="modalRemoveItem = true"
+                         v-if="displayButton"/>
     </div>
     <TransitionRoot appear :show="modalRemoveItem" as="template">
       <Dialog as="div" class="relative z-50" @close="modalRemoveItem = false">
@@ -20,10 +21,12 @@
             <div class="flex flex-col justify-center items-center gap-5">
               <font-awesome-icon icon="trash-can" class="text-3xl text-red-400 cursor-pointer"/>
               <h2 class="text-lg text-gray-500">Voulez-vous supprimez cette article ?</h2>
-              <small class="mb-5 text-gray-500 font-bold">Produit {{product}}</small>
+              <small class="mb-5 text-gray-500 font-bold">Produit {{ product }}</small>
               <div class="flex gap-5">
                 <Button @click="modalRemoveItem = false" text="Annuler"/>
-                <Button buttonClass="bg-red-400 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer" text="Confirmer" />
+                <Button
+                    buttonClass="bg-red-400 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer"
+                    text="Confirmer"/>
               </div>
             </div>
           </DialogPanel>
@@ -36,7 +39,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from "@headlessui/vue";
-import Button from "../tools/Button.vue";
+import Button from "@/tools/Button.vue";
 
 const props = defineProps({
   product: String,

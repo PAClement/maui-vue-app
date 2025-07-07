@@ -8,8 +8,8 @@
               <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-400"/>
             </RouterLink>
           </div>
-          <div class="flex-[3] flex justify-center">
-            <img src="../../assets/img/logo.png" alt="logo">
+          <div class="flex-[3] flex justify-center²">
+            <img src="@/../assets/img/logo.png" alt="logo">
           </div>
           <div class="flex-[3]  flex justify-end">
             <Button @click="modalAskHelp = true" text="Demander de l'aide" iconSide="left" icon="warning"
@@ -72,12 +72,12 @@
 
 import {ref, computed} from "vue";
 import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
-import Button from "../tools/Button.vue";
-import Article from "../components/Article.vue";
-import Bag from "../components/StepSideCheckout/Bag.vue";
-import Cart from "../components/StepSideCheckout/Cart.vue";
-import Loyalty from "../components/StepSideCheckout/Loyalty.vue";
-import {ButtonConfig} from "../interface";
+import Button from "@/tools/Button.vue";
+import Article from "@/components/Article.vue";
+import Bag from "@/components/StepSideCheckout/Bag.vue";
+import Cart from "@/components/StepSideCheckout/Cart.vue";
+import Loyalty from "@/components/StepSideCheckout/Loyalty.vue";
+import {ButtonConfig} from "@/interface";
 
 const modalAskHelp = ref(false);
 
