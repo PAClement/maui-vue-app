@@ -47,7 +47,7 @@ waitForDotNet().then(() => {
     try {
         console.log('DotNet ready');
         // Vos appels DotNet ici
-        window.DotNet.invokeMethod("Assembly", "MethodName");
+        window.DotNet.invokeMethod("System", "GetSystemInfoAsync");
     } catch (error) {
         console.log('Error calling DotNet:', error);
     }
