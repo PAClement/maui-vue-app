@@ -53,7 +53,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {faBell} from '@fortawesome/free-regular-svg-icons'
 
-
 library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft, faQrcode, faPlus, faCircleCheck);
 
 const app = createApp({
