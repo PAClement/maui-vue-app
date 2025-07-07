@@ -109,7 +109,6 @@ const getSystemInfo = async () => {
 
 const increment = async () => {
   await BlazorBridge.call('Counter', 'Increment');
-
 }
 const setValue = async () => {
   await BlazorBridge.call('Counter', 'SetValue', 100);
