@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="increment">Increment</button>
-    <pre>{{ blazor.counterValue }}</pre>
+    <pre>{{ store.counterValue }}</pre>
   </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
 import {BlazorBridge} from '@/plugins/blazorBridge';
@@ -80,7 +80,7 @@ const isOpen = ref(false);
 const modalAskHelp = ref(false);
 
 const currentFlag = ref('fr');
-const blazor = useBlazorStore();
+const store = useBlazorStore();
 
 const flags_list = computed(() => {
   return flags.value.filter((flag: string) => flag !== currentFlag.value);
@@ -93,11 +93,6 @@ const getFlagSrc = (flag: string) => {
 const increment = async () => {
   await BlazorBridge.call('System', 'Increment');
 }
-
-onMounted(async () => {
-  blazor.initializeEventBridge()
-  await blazor.subscribeToService('System');
-});
 
 </script>
 
