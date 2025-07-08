@@ -1,33 +1,40 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
-import {Alert, EventData, SubscribeResult} from '@/interfaces'
+import {Alert, CustomerBasketInformation, EventData, Product, SubscribeResult} from '@/interfaces'
 
 export const useBlazorStore = defineStore('store', () => {
 
-    const counterValue = ref<number>(0);
     const alert = ref<Alert | null>(null);
-
-    console.log('Blazor store initialized')
+    const products = ref<Product[] | null>(null);
+    const customerBasketInformation = ref<CustomerBasketInformation>({
+        totalBasketAmount: 0,
+        totalBasketQuantity: 0
+    });
 
     const initializeEventBridge = (): void => {
-        console.log('Initializing Blazor event bridge...')
         window.blazorEventBridge = {
             onPropertyChanged: (eventDataJson: string): void => {
                 console.log('[Blazor Event Bridge] Received event data:', eventDataJson)
                 try {
                     const eventData: EventData = JSON.parse(eventDataJson)
-                    console.log('[Blazor Event]', eventData)
 
-                    if (eventData.Service === 'System' && eventData.Property && eventData.Value) {
+                    if (eventData.Service === 'System') {
                         switch (eventData.Property) {
-                            case 'Value':
-                                console.log(`Counter value changed: ${eventData.Value}`)
-                                counterValue.value = Number(eventData.Value)
-                                break;
                             case 'Alert':
-                                console.log(`Alert from Blazor: ${eventData.Value}`)
-                                const alertData = eventData.Value as Alert
-                                alert.value = alertData
+                                alert.value = eventData.Value as Alert
+                                break;
+                        }
+
+                    } else if (eventData.Service === 'CustomerOrder') {
+                        switch (eventData.Property) {
+                            case 'SelectedProducts':
+                                products.value = eventData.Value as Product[]
+                                break;
+                            case 'TotalBasketAmount':
+                                customerBasketInformation.value.totalBasketAmount = (eventData.Value as CustomerBasketInformation).totalBasketAmount
+                                break;
+                            case 'TotalBasketQuantity':
+                                customerBasketInformation.value.totalBasketQuantity = (eventData.Value as CustomerBasketInformation).totalBasketQuantity
                                 break;
                         }
 
@@ -68,7 +75,8 @@ export const useBlazorStore = defineStore('store', () => {
     }
 
     return {
-        counterValue,
+        products,
+        customerBasketInformation,
         alert,
         initializeEventBridge,
         subscribeToService,
