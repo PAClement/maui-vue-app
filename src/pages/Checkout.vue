@@ -27,7 +27,7 @@
             </div>
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex flex-col gap-3" v-for="product in store.products">
-              <Article :product="product.name" :refProduct="product.internalRef ?? ''" :price="product.price" :displayButton="currentStep === 'cart'"/>
+              <Article :product="product.Name" :refProduct="product.InternalRef ?? ''" :price="product.Price" :displayButton="currentStep === 'cart'"/>
             </div>
           </div>
           <div class="flex-[1]">
