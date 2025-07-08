@@ -25,6 +25,50 @@ export interface ButtonConfig {
 }
 
 /*Interface data */
+export interface Product {
+    name: string;
+    plu?: string;
+    internalRef?: string;
+    fkDepartment?: number;
+    fkCategory?: number;
+    fkFamily?: number;
+    fkSubFamily?: number;
+    fkVat: number;
+    price: number;
+    purchasingPrice: number;
+    fkAccountingCode: number;
+    isManagedInStock: boolean;
+    fkStock?: number;
+    isWeighed: boolean;
+    isMenu: boolean;
+    isEligibleLunchVoucher: boolean;
+    isNegativePrice: boolean;
+    ageRestrictions: boolean;
+    fkSupplier: number;
+    isInactive: boolean;
+    fkUnit: number;
+    capacity?: number;
+    tare?: number;
+    consumptionDeadline?: number;
+    secondaryFeatures?: SecondaryFeatures;
+}
+
+interface SecondaryFeatures {
+    origin?: string;
+    variety?: string;
+    sizeCode?: string;
+    scientificName?: string;
+    shortDescription?: string;
+    description?: string;
+    ingredients?: string;
+    allergens?: string[];
+}
+
+export interface CustomerBasketInformation{
+    totalBasketAmount: number;
+    totalBasketQuantity: number;
+}
+
 export interface Alert {
     Title: string;
     Message: string;
