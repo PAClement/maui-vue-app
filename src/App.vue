@@ -19,7 +19,6 @@ const blazorError = ref<string | null>(null);
 
 const initializeBlazor = async (): Promise<void> => {
   try {
-    isLoading.value = true;
     blazorError.value = null;
     loadingMessage.value = 'Vérification de Blazor...';
 
@@ -28,6 +27,10 @@ const initializeBlazor = async (): Promise<void> => {
     if (result.isAvailable) {
       console.log(`Blazor ${result.version} est disponible et prêt`);
       loadingMessage.value = 'Blazor initialisé avec succès';
+
+      // Subscribe to Blazor events
+      blazor.initializeEventBridge()
+      await blazor.subscribeToService('System');
 
       setTimeout(() => {
         isLoading.value = false;
