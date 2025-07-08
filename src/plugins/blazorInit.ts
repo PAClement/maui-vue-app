@@ -1,9 +1,4 @@
-// blazorInit.ts
-export interface BlazorInitResult {
-    isAvailable: boolean;
-    version?: string;
-    error?: string;
-}
+import {BlazorInitResult} from '@/interfaces'
 
 export class BlazorInitializer {
     private static instance: BlazorInitializer;
@@ -116,7 +111,6 @@ export class BlazorInitializer {
                 };
             }
 
-            // Tenter de démarrer Blazor WebAssembly
             await blazor.start();
 
             return {
