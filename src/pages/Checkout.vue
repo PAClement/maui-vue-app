@@ -1,5 +1,5 @@
 <template>
-  <p>{{blazor.counterValue}}</p>
+  <button @click="addProduct">ADD PRODUCT</button>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
       <div class="flex-[1]">
@@ -26,8 +26,8 @@
               <span class="text-lg font-bold text-gray-500">1 ARTICLES</span>
             </div>
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
-            <div class="flex flex-col gap-3">
-              <Article product="A" refProduct="d4q5q1d5q4d" price="10.30" :displayButton="currentStep === 'cart'"/>
+            <div class="flex flex-col gap-3" v-for="product in store.products">
+              <Article :product="product.name" :refProduct="product.internalRef ?? ''" :price="product.price" :displayButton="currentStep === 'cart'"/>
             </div>
           </div>
           <div class="flex-[1]">
@@ -81,9 +81,10 @@ import Loyalty from "@/components/StepSideCheckout/Loyalty.vue";
 import {ButtonConfig} from "@/interfaces";
 import PaymentMethod from "@/components/StepSideCheckout/PaymentMethod.vue";
 import {useBlazorStore} from "@/plugins/blazorEvent";
+import {BlazorBridge} from '@/plugins/blazorBridge';
 
 const modalAskHelp = ref(false);
-const blazor = useBlazorStore();
+const store = useBlazorStore();
 
 const steps = ['cart', 'bag', 'loyalty', 'paymentMethod'] as const;
 type Step = typeof steps[number];
@@ -95,6 +96,11 @@ const stepComponentMap = {
   loyalty: Loyalty,
   paymentMethod: PaymentMethod
 };
+
+const addProduct = async () => {
+  console.log('add product')
+  await BlazorBridge.call('CustomerOrder', 'AddProduct');
+}
 
 const currentComponent = computed(() => stepComponentMap[currentStep.value]);
 
