@@ -198,6 +198,7 @@ const cancelCart = async () => {
   loaderDeleteCart.value = true;
 
   return BlazorBridge.call('CustomerOrder', 'CancelBasket').then((res) => {
+    console.log(res)
     setTimeout(() => {
       modalCancelCart.value = false;
       router.push('/');
