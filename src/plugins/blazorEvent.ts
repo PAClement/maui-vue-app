@@ -52,6 +52,7 @@ export const useBlazorStore = defineStore('store', () => {
             )
 
             const result: SubscribeResult = JSON.parse(response)
+            console.log('testing test TEST ' + result)
             if (result.success) {
                 console.log(`✅ Subscribed to ${serviceName}`)
                 return true
