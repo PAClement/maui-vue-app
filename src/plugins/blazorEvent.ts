@@ -1,10 +1,12 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
-import {EventData, SubscribeResult} from '@/interfaces'
+import {Alert, EventData, SubscribeResult} from '@/interfaces'
 
 export const useBlazorStore = defineStore('store', () => {
 
-    const counterValue = ref<number>(0)
+    const counterValue = ref<number>(0);
+    const alert = ref<Alert | null>(null);
+
     console.log('Blazor store initialized')
 
     const initializeEventBridge = (): void => {
@@ -16,14 +18,16 @@ export const useBlazorStore = defineStore('store', () => {
                     const eventData: EventData = JSON.parse(eventDataJson)
                     console.log('[Blazor Event]', eventData)
 
-                    if (eventData.Service === 'System') {
-                        switch (eventData.Property) {
+                    if (eventData.service === 'System' && eventData.property && eventData.value) {
+                        switch (eventData.property) {
                             case 'Value':
-                                console.log(`Counter value changed: ${eventData.Value}`)
-                                counterValue.value = Number(eventData.Value)
+                                console.log(`Counter value changed: ${eventData.value}`)
+                                counterValue.value = Number(eventData.value)
                                 break;
                             case 'Alert':
-                                console.log(`Alert from Blazor: ${eventData.Value}`)
+                                console.log(`Alert from Blazor: ${eventData.value}`)
+                                const alertData = eventData.value as Alert
+                                alert.value = alertData
                                 break;
                         }
 
@@ -48,11 +52,11 @@ export const useBlazorStore = defineStore('store', () => {
             )
 
             const result: SubscribeResult = JSON.parse(response)
-            if (result.Success) {
+            if (result.success) {
                 console.log(`✅ Subscribed to ${serviceName}`)
                 return true
             } else {
-                console.error(`❌ Failed to subscribe to ${serviceName}:`, result.Error)
+                console.error(`❌ Failed to subscribe to ${serviceName}:`, result.error)
                 return false
             }
         } catch (error) {
@@ -62,10 +66,8 @@ export const useBlazorStore = defineStore('store', () => {
     }
 
     return {
-        // State
         counterValue,
-
-        // Blazor bridge
+        alert,
         initializeEventBridge,
         subscribeToService,
     }

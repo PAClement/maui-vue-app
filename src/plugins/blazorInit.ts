@@ -26,7 +26,7 @@ export class BlazorInitializer {
         try {
             if (typeof window === 'undefined') {
                 return {
-                    isAvailable: false,
+                    is_available: false,
                     error: 'Window object not available (SSR context)'
                 };
             }
@@ -34,7 +34,7 @@ export class BlazorInitializer {
             const blazor = (window as any).Blazor;
             if (!blazor) {
                 return {
-                    isAvailable: false,
+                    is_available: false,
                     error: 'Blazor object not found in window'
                 };
             }
@@ -48,13 +48,13 @@ export class BlazorInitializer {
             }
 
             return {
-                isAvailable: false,
+                is_available: false,
                 error: 'Unknown Blazor type'
             };
 
         } catch (error) {
             return {
-                isAvailable: false,
+                is_available: false,
                 error: `Blazor initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
@@ -66,7 +66,7 @@ export class BlazorInitializer {
 
             if (connection && connection.state === 'Connected') {
                 return {
-                    isAvailable: true,
+                    is_available: true,
                     version: 'Server'
                 };
             }
@@ -74,7 +74,7 @@ export class BlazorInitializer {
             return new Promise((resolve) => {
                 const timeout = setTimeout(() => {
                     resolve({
-                        isAvailable: false,
+                        is_available: false,
                         error: 'Blazor Server connection timeout'
                     });
                 }, 5000);
@@ -83,7 +83,7 @@ export class BlazorInitializer {
                     if (connection && connection.state === 'Connected') {
                         clearTimeout(timeout);
                         resolve({
-                            isAvailable: true,
+                            is_available: true,
                             version: 'Server'
                         });
                     } else {
@@ -96,7 +96,7 @@ export class BlazorInitializer {
 
         } catch (error) {
             return {
-                isAvailable: false,
+                is_available: false,
                 error: `Blazor Server check failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
@@ -106,7 +106,7 @@ export class BlazorInitializer {
         try {
             if (blazor._internal?.dotNetObjectReference) {
                 return {
-                    isAvailable: true,
+                    is_available: true,
                     version: 'WebAssembly'
                 };
             }
@@ -114,13 +114,13 @@ export class BlazorInitializer {
             await blazor.start();
 
             return {
-                isAvailable: true,
+                is_available: true,
                 version: 'WebAssembly'
             };
 
         } catch (error) {
             return {
-                isAvailable: false,
+                is_available: false,
                 error: `Blazor WebAssembly start failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
