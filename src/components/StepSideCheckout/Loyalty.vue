@@ -46,6 +46,7 @@
                 iconSide="left"
                 icon="circle-check"
                 iconColor="text-white"
+                @click="$emit('next')"
             />
           </div>
         </DialogPanel>
