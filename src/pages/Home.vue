@@ -114,9 +114,13 @@ const increment = async () => {
   await BlazorBridge.call('System', 'Increment');
 }
 const setValue = async () => {
+  await BlazorBridge.call('System', 'SetValue', 100);
+}
+
+onMounted(async () => {
   blazor.initializeEventBridge()
   await blazor.subscribeToService('System')
-}
+})
 
 </script>
 
