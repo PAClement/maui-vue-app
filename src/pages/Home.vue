@@ -1,8 +1,4 @@
 <template>
-  <div>
-    <button @click="increment">Increment</button>
-    <pre>{{ store.counterValue }}</pre>
-  </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
       <div class="flex-[3] flex justify-center items-center">
@@ -70,9 +66,6 @@
 import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
-import {BlazorBridge} from '@/plugins/blazorBridge';
-import {useBlazorStore} from "@/plugins/blazorEvent";
-
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
@@ -80,7 +73,6 @@ const isOpen = ref(false);
 const modalAskHelp = ref(false);
 
 const currentFlag = ref('fr');
-const store = useBlazorStore();
 
 const flags_list = computed(() => {
   return flags.value.filter((flag: string) => flag !== currentFlag.value);
@@ -88,10 +80,6 @@ const flags_list = computed(() => {
 
 const getFlagSrc = (flag: string) => {
   return new URL(`./assets/img/flags/${flag}.png`, import.meta.url).href
-}
-
-const increment = async () => {
-  await BlazorBridge.call('System', 'Increment');
 }
 
 </script>
