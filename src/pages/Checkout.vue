@@ -197,7 +197,7 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
 const cancelCart = async () => {
   loaderDeleteCart.value = true;
 
-  return BlazorBridge.call('CustomerOrder', 'AddProduct').then((res) => {
+  return BlazorBridge.call('CustomerOrder', 'CancelBasket').then((res) => {
     setTimeout(() => {
       modalCancelCart.value = false;
       router.push('/');
