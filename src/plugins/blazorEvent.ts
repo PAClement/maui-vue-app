@@ -18,15 +18,15 @@ export const useBlazorStore = defineStore('store', () => {
                     const eventData: EventData = JSON.parse(eventDataJson)
                     console.log('[Blazor Event]', eventData)
 
-                    if (eventData.service === 'System' && eventData.property && eventData.value) {
-                        switch (eventData.property) {
+                    if (eventData.Service === 'System' && eventData.Property && eventData.Value) {
+                        switch (eventData.Property) {
                             case 'Value':
-                                console.log(`Counter value changed: ${eventData.value}`)
-                                counterValue.value = Number(eventData.value)
+                                console.log(`Counter value changed: ${eventData.Value}`)
+                                counterValue.value = Number(eventData.Value)
                                 break;
                             case 'Alert':
-                                console.log(`Alert from Blazor: ${eventData.value}`)
-                                const alertData = eventData.value as Alert
+                                console.log(`Alert from Blazor: ${eventData.Value}`)
+                                const alertData = eventData.Value as Alert
                                 alert.value = alertData
                                 break;
                         }
@@ -54,11 +54,11 @@ export const useBlazorStore = defineStore('store', () => {
             const result: SubscribeResult = JSON.parse(response)
             console.log('testing test TEST ')
             console.log(result)
-            if (result.success) {
+            if (result.Success) {
                 console.log(`✅ Subscribed to ${serviceName}`)
                 return true
             } else {
-                console.error(`❌ Failed to subscribe to ${serviceName}:`, result.error)
+                console.error(`❌ Failed to subscribe to ${serviceName}:`, result.Error)
                 return false
             }
         } catch (error) {

@@ -26,26 +26,26 @@ export interface ButtonConfig {
 
 /*Interface data */
 export interface Alert {
-    title: string;
-    message: string;
-    type: string;
-    timestamp: Date;
+    Title: string;
+    Message: string;
+    Type: string;
+    Timestamp: Date;
 }
 
 /*Interface Blazor*/
 export interface EventData {
-    service: string
-    property: string
-    value: unknown
+    Service: string
+    Property: string
+    Value: unknown
 }
 
 export interface SubscribeResult {
-    success: boolean
-    error?: string
+    Success: boolean
+    Error?: string
 }
 
 export interface BlazorInitResult {
-    is_available: boolean;
-    version?: string;
-    error?: string;
+    IsAvailable: boolean;
+    Version?: string;
+    Error?: string;
 }

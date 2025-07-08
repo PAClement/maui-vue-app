@@ -26,16 +26,16 @@ export class BlazorInitializer {
         try {
             if (typeof window === 'undefined') {
                 return {
-                    is_available: false,
-                    error: 'Window object not available (SSR context)'
+                    IsAvailable: false,
+                    Error: 'Window object not available (SSR context)'
                 };
             }
 
             const blazor = (window as any).Blazor;
             if (!blazor) {
                 return {
-                    is_available: false,
-                    error: 'Blazor object not found in window'
+                    IsAvailable: false,
+                    Error: 'Blazor object not found in window'
                 };
             }
 
@@ -48,14 +48,14 @@ export class BlazorInitializer {
             }
 
             return {
-                is_available: false,
-                error: 'Unknown Blazor type'
+                IsAvailable: false,
+                Error: 'Unknown Blazor type'
             };
 
         } catch (error) {
             return {
-                is_available: false,
-                error: `Blazor initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+                IsAvailable: false,
+                Error: `Blazor initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
     }
@@ -66,16 +66,16 @@ export class BlazorInitializer {
 
             if (connection && connection.state === 'Connected') {
                 return {
-                    is_available: true,
-                    version: 'Server'
+                    IsAvailable: true,
+                    Version: 'Server'
                 };
             }
 
             return new Promise((resolve) => {
                 const timeout = setTimeout(() => {
                     resolve({
-                        is_available: false,
-                        error: 'Blazor Server connection timeout'
+                        IsAvailable: false,
+                        Error: 'Blazor Server connection timeout'
                     });
                 }, 5000);
 
@@ -83,8 +83,8 @@ export class BlazorInitializer {
                     if (connection && connection.state === 'Connected') {
                         clearTimeout(timeout);
                         resolve({
-                            is_available: true,
-                            version: 'Server'
+                            IsAvailable: true,
+                            Version: 'Server'
                         });
                     } else {
                         setTimeout(checkConnection, 100);
@@ -96,8 +96,8 @@ export class BlazorInitializer {
 
         } catch (error) {
             return {
-                is_available: false,
-                error: `Blazor Server check failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+                IsAvailable: false,
+                Error: `Blazor Server check failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
     }
@@ -106,22 +106,22 @@ export class BlazorInitializer {
         try {
             if (blazor._internal?.dotNetObjectReference) {
                 return {
-                    is_available: true,
-                    version: 'WebAssembly'
+                    IsAvailable: true,
+                    Version: 'WebAssembly'
                 };
             }
 
             await blazor.start();
 
             return {
-                is_available: true,
-                version: 'WebAssembly'
+                IsAvailable: true,
+                Version: 'WebAssembly'
             };
 
         } catch (error) {
             return {
-                is_available: false,
-                error: `Blazor WebAssembly start failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+                IsAvailable: false,
+                Error: `Blazor WebAssembly start failed: ${error instanceof Error ? error.message : 'Unknown error'}`
             };
         }
     }

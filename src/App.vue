@@ -23,14 +23,14 @@ const initializeBlazor = (): Promise<void> => {
     try {
       const result: BlazorInitResult = await blazorInit.checkBlazorAvailability();
 
-      if (result.is_available) {
-        console.log(`Blazor ${result.version} est disponible et prêt`);
+      if (result.IsAvailable) {
+        console.log(`Blazor ${result.Version} est disponible et prêt`);
         setTimeout(() => {
           resolve();
         }, 500);
       } else {
-        console.error('Blazor non disponible:', result.error);
-        reject(new Error(result.error || 'Blazor non disponible'));
+        console.error('Blazor non disponible:', result.Error);
+        reject(new Error(result.Error || 'Blazor non disponible'));
       }
     } catch (error) {
       console.error('Erreur lors de l\'initialisation:', error);

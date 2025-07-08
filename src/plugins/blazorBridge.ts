@@ -5,9 +5,9 @@ export class BlazorBridge {
         ...params: any[]
     ): Promise<TResponse | { success: false; error: string }> {
         const request = {
-            service,
-            method,
-            data: params.length === 1
+            Service: service,
+            Method: method,
+            Data: params.length === 1
                 ? JSON.stringify(params[0])
                 : JSON.stringify(params)
         };
