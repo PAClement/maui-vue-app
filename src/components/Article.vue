@@ -21,7 +21,7 @@
             <div class="flex flex-col justify-center items-center gap-5">
               <font-awesome-icon icon="trash-can" class="text-3xl text-red-500 cursor-pointer"/>
               <h2 class="text-lg text-gray-500">Voulez-vous supprimez cette article ?</h2>
-              <small class="mb-5 text-gray-500 font-bold">Produit {{ product }}</small>
+              <small class="mb-5 text-gray-500 font-bold">{{ product }}</small>
               <div class="flex gap-5">
                 <Button @click="modalRemoveItem = false" text="Annuler"/>
                 <Button
