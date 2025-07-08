@@ -26,42 +26,42 @@ export interface ButtonConfig {
 
 /*Interface data */
 export interface Product {
-    name: string;
-    plu?: string;
-    internalRef?: string;
-    fkDepartment?: number;
-    fkCategory?: number;
-    fkFamily?: number;
-    fkSubFamily?: number;
-    fkVat: number;
-    price: number;
-    purchasingPrice: number;
-    fkAccountingCode: number;
-    isManagedInStock: boolean;
-    fkStock?: number;
-    isWeighed: boolean;
-    isMenu: boolean;
-    isEligibleLunchVoucher: boolean;
-    isNegativePrice: boolean;
-    ageRestrictions: boolean;
-    fkSupplier: number;
-    isInactive: boolean;
-    fkUnit: number;
-    capacity?: number;
-    tare?: number;
-    consumptionDeadline?: number;
-    secondaryFeatures?: SecondaryFeatures;
+    Name: string;
+    Plu?: string;
+    InternalRef?: string;
+    FkDepartment?: number;
+    FkCategory?: number;
+    FkFamily?: number;
+    FkSubFamily?: number;
+    FkVat: number;
+    Price: number;
+    PurchasingPrice: number;
+    FkAccountingCode: number;
+    IsManagedInStock: boolean;
+    FkStock?: number;
+    IsWeighed: boolean;
+    IsMenu: boolean;
+    IsEligibleLunchVoucher: boolean;
+    IsNegativePrice: boolean;
+    AgeRestrictions: boolean;
+    FkSupplier: number;
+    IsInactive: boolean;
+    FkUnit: number;
+    Capacity?: number;
+    Tare?: number;
+    ConsumptionDeadline?: number;
+    SecondaryFeatures?: SecondaryFeatures;
 }
 
-interface SecondaryFeatures {
-    origin?: string;
-    variety?: string;
-    sizeCode?: string;
-    scientificName?: string;
-    shortDescription?: string;
-    description?: string;
-    ingredients?: string;
-    allergens?: string[];
+export interface SecondaryFeatures {
+    Origin?: string;
+    Variety?: string;
+    SizeCode?: string;
+    ScientificName?: string;
+    ShortDescription?: string;
+    Description?: string;
+    Ingredients?: string;
+    Allergens?: string[];
 }
 
 export interface CustomerBasketInformation{

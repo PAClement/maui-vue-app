@@ -31,10 +31,10 @@ export const useBlazorStore = defineStore('store', () => {
                                 products.value = eventData.Value as Product[]
                                 break;
                             case 'TotalBasketAmount':
-                                customerBasketInformation.value.totalBasketAmount = (eventData.Value as CustomerBasketInformation).totalBasketAmount
+                                customerBasketInformation.value.totalBasketAmount = eventData.Value as number
                                 break;
                             case 'TotalBasketQuantity':
-                                customerBasketInformation.value.totalBasketQuantity = (eventData.Value as CustomerBasketInformation).totalBasketQuantity
+                                customerBasketInformation.value.totalBasketQuantity = eventData.Value as number
                                 break;
                         }
 
