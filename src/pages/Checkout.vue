@@ -23,7 +23,7 @@
           <div class="flex-[9]">
             <div class="flex items-center justify-between">
               <span class="text-3xl font-bold text-gray-500">Votre Panier</span>
-              <span class="text-lg font-bold text-gray-500">1 ARTICLES</span>
+              <span class="text-lg font-bold text-gray-500">{{store.customerBasketInformation.totalBasketQuantity}} ARTICLES</span>
             </div>
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex flex-col gap-3" v-for="product in store.products">
@@ -34,7 +34,7 @@
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex items-center justify-between">
               <span class="text-3xl font-bold text-gray-500">Total</span>
-              <span class="text-lg font-bold text-gray-500">13.99 €</span>
+              <span class="text-lg font-bold text-gray-500">{{store.customerBasketInformation.totalBasketAmount}} €</span>
             </div>
           </div>
         </div>
