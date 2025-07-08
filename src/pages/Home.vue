@@ -72,10 +72,11 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
 import {BlazorBridge} from '@/plugins/blazorBridge';
+import {useBlazorStore} from "@/plugins/blazorEvent";
 
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
@@ -90,7 +91,7 @@ const flags_list = computed(() => {
 });
 
 const getFlagSrc = (flag: string) => {
-  return new URL(`@/assets/img/flags/${flag}.png`, import.meta.url).href
+  return new URL(`./assets/img/flags/${flag}.png`, import.meta.url).href
 }
 
 const handleProduct = (payload: any) => {
@@ -113,6 +114,12 @@ const increment = async () => {
 const setValue = async () => {
   await BlazorBridge.call('Counter', 'SetValue', 100);
 }
+
+onMounted(async () => {
+  const blazor = useBlazorStore()
+  blazor.initializeEventBridge()
+  await blazor.subscribeToService('System')
+})
 
 </script>
 

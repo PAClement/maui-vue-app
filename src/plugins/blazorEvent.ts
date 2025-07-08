@@ -17,10 +17,16 @@ declare global {
     }
 }
 
+// Interfaces
 interface EventData {
     Service: string
     Property: string
-    Value: number
+    Value: unknown
+}
+
+interface SubscribeResult {
+    Success: boolean
+    Error?: string
 }
 
 interface BlazorResult<T = unknown> {
@@ -29,29 +35,29 @@ interface BlazorResult<T = unknown> {
     error?: string
 }
 
-interface SubscribeResult {
-    Success: boolean
-    Error?: string
-}
-
 export const useBlazorStore = defineStore('blazor', () => {
+    // Example state (Counter)
     const counterValue = ref<number>(0)
     const isConnected = ref<boolean>(false)
 
+    // Derived state
     const doubleCounter = computed(() => counterValue.value * 2)
 
+    // Bridge init
     const initializeEventBridge = (): void => {
         window.blazorEventBridge = {
             onPropertyChanged: (eventDataJson: string): void => {
                 try {
                     const eventData: EventData = JSON.parse(eventDataJson)
-                    console.log('Property changed:', eventData)
+                    console.log('[Blazor Event]', eventData)
 
                     if (eventData.Service === 'Counter' && eventData.Property === 'Value') {
-                        counterValue.value = eventData.Value
+                        counterValue.value = Number(eventData.Value)
                     }
+
+                    // Tu peux ajouter d'autres cas ici
                 } catch (error) {
-                    console.error('Error handling property change:', error)
+                    console.error('Invalid Blazor event data:', error)
                 }
             }
         }
@@ -59,47 +65,31 @@ export const useBlazorStore = defineStore('blazor', () => {
         isConnected.value = true
     }
 
-    const subscribeToCounter = async (): Promise<void> => {
+    /**
+     * Subscribe to a given C# service (e.g. 'Counter', 'User', etc.)
+     * @param serviceName - Name of the service to subscribe
+     */
+    const subscribeToService = async (serviceName: string): Promise<boolean> => {
         try {
             const response = await window.DotNet.invokeMethodAsync(
                 'BlazorMaui.Core',
                 'SubscribeToService',
-                'System'
+                serviceName
             )
 
             const result: SubscribeResult = JSON.parse(response)
             if (result.Success) {
-                console.log('✅ Subscribed to Counter service')
-                await refreshCounter()
+                console.log(`✅ Subscribed to ${serviceName}`)
+                console.log(result)
+                return true
             } else {
-                console.error('❌ Failed to subscribe:', result.Error)
+                console.error(`❌ Failed to subscribe to ${serviceName}:`, result.Error)
+                return false
             }
         } catch (error) {
-            console.error('Error subscribing to Counter:', error)
+            console.error(`Error subscribing to ${serviceName}:`, error)
+            return false
         }
-    }
-
-    const refreshCounter = async (): Promise<void> => {
-        const result: BlazorResult<number> = await BlazorBridge.call('System', 'GetValue')
-        if (result.success && typeof result.data === 'number') {
-            counterValue.value = result.data
-        }
-    }
-
-    const incrementCounter = async (): Promise<BlazorResult> => {
-        return await BlazorBridge.call('Counter', 'Increment')
-    }
-
-    const decrementCounter = async (): Promise<BlazorResult> => {
-        return await BlazorBridge.call('Counter', 'Decrement')
-    }
-
-    const resetCounter = async (): Promise<BlazorResult> => {
-        return await BlazorBridge.call('Counter', 'Reset')
-    }
-
-    const setCounter = async (value: number): Promise<BlazorResult> => {
-        return await BlazorBridge.call('Counter', 'SetValue', value)
     }
 
     return {
@@ -110,13 +100,8 @@ export const useBlazorStore = defineStore('blazor', () => {
         // Getters
         doubleCounter,
 
-        // Actions
+        // Blazor bridge
         initializeEventBridge,
-        subscribeToCounter,
-        refreshCounter,
-        incrementCounter,
-        decrementCounter,
-        resetCounter,
-        setCounter
+        subscribeToService,
     }
 })
