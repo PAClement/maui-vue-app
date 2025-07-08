@@ -1,12 +1,6 @@
 <template>
   <div>
-    <button @click="getSystemInfo">System Info</button>
-    <br>
     <button @click="increment">Increment</button>
-    <br>
-    <button @click="setValue">Set Value to 100</button>
-
-    <pre>{{ result }}</pre>
     <pre>{{blazor.counterValue}}</pre>
   </div>
   <section class="h-screen bg-white flex flex-col p-3">
@@ -73,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
 import {BlazorBridge} from '@/plugins/blazorBridge';
@@ -86,6 +80,7 @@ const isOpen = ref(false);
 const modalAskHelp = ref(false);
 
 const currentFlag = ref('fr');
+const blazor = useBlazorStore();
 
 const flags_list = computed(() => {
   return flags.value.filter((flag: string) => flag !== currentFlag.value);
@@ -95,32 +90,9 @@ const getFlagSrc = (flag: string) => {
   return new URL(`./assets/img/flags/${flag}.png`, import.meta.url).href
 }
 
-const handleProduct = (payload: any) => {
-  console.log(payload)
-};
-
-const result = ref();
-const blazor = useBlazorStore();
-
-type Product = {
-  id: number;
-  barcode: string;
-};
-const getSystemInfo = async () => {
-  result.value = await BlazorBridge.call<Product>('System', 'GetProduct', 1, '1234567890');
-}
-
 const increment = async () => {
   await BlazorBridge.call('System', 'Increment');
 }
-const setValue = async () => {
-  await BlazorBridge.call('System', 'SetValue', 100);
-}
-
-onMounted(async () => {
-  blazor.initializeEventBridge()
-  await blazor.subscribeToService('System')
-})
 
 </script>
 
