@@ -41,10 +41,7 @@ const initializeBlazor = (): Promise<void> => {
 
 onMounted(() => {
   initializeBlazor()
-      .then(async () => {
-        blazor.initializeEventBridge();
-        await blazor.subscribeToService('System');
-
+      .then(() => {
         isLoading.value = false;
       })
       .catch((err) => {
