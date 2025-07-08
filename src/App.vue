@@ -29,8 +29,7 @@ const initializeBlazor = async (): Promise<void> => {
       loadingMessage.value = 'Blazor initialisé avec succès';
 
       // Subscribe to Blazor events
-      blazor.initializeEventBridge()
-      await blazor.subscribeToService('System');
+
 
       setTimeout(() => {
         isLoading.value = false;
