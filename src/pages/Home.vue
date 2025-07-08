@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="increment">Increment</button>
-    <pre>{{ store.counterValue }}</pre>
+    <pre>{{ blazor.counterValue }}</pre>
   </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
@@ -80,7 +80,7 @@ const isOpen = ref(false);
 const modalAskHelp = ref(false);
 
 const currentFlag = ref('fr');
-const store = useBlazorStore();
+const blazor = useBlazorStore();
 
 const flags_list = computed(() => {
   return flags.value.filter((flag: string) => flag !== currentFlag.value);

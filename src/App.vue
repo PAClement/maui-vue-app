@@ -16,7 +16,7 @@ import {BlazorInitResult} from "@/interfaces";
 
 const isLoading = ref(true);
 const loadingMessage = ref('Initialisation de la borne...');
-const store = useBlazorStore()
+const blazor = useBlazorStore()
 
 const initializeBlazor = (): Promise<void> => {
   return new Promise(async (resolve, reject) => {
@@ -42,8 +42,8 @@ const initializeBlazor = (): Promise<void> => {
 onMounted(() => {
   initializeBlazor()
       .then(async () => {
-        store.initializeEventBridge();
-        await store.subscribeToService('System');
+        blazor.initializeEventBridge();
+        await blazor.subscribeToService('System');
 
         isLoading.value = false;
       })
@@ -54,7 +54,7 @@ onMounted(() => {
       });
 });
 
-watch(() => store.alert, (msg) => {
+watch(() => blazor.alert, (msg) => {
   if (msg) {
     console.log(msg)
   }

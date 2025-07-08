@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {ref} from 'vue'
 import {Alert, EventData, SubscribeResult} from '@/interfaces'
 
-export const useBlazorStore = defineStore('store', () => {
+export const useBlazorStore = defineStore('blazor', () => {
 
     const counterValue = ref<number>(0);
     const alert = ref<Alert | null>(null);

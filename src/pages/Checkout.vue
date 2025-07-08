@@ -1,5 +1,5 @@
 <template>
-  <p>{{store.counterValue}}</p>
+  <p>{{blazor.counterValue}}</p>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
       <div class="flex-[1]">
@@ -83,7 +83,7 @@ import PaymentMethod from "@/components/StepSideCheckout/PaymentMethod.vue";
 import {useBlazorStore} from "@/plugins/blazorEvent";
 
 const modalAskHelp = ref(false);
-const store = useBlazorStore();
+const blazor = useBlazorStore();
 
 const steps = ['cart', 'bag', 'loyalty', 'paymentMethod'] as const;
 type Step = typeof steps[number];
