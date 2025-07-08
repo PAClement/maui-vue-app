@@ -30,14 +30,17 @@ import {
     faGift,
     faCrown
 } from '@fortawesome/free-solid-svg-icons'
+import {createPinia} from "pinia";
 
 library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft, faQrcode, faPlus, faCircleCheck, faCreditCard, faGift, faCrown);
+
+const pinia = createPinia();
 
 const app = createApp({
     setup: () => {
     },
     render: () => h(App)
 });
-app.use(router).component('font-awesome-icon', FontAwesomeIcon)
+app.use(pinia).use(router).component('font-awesome-icon', FontAwesomeIcon)
     .mount("#app");
 

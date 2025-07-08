@@ -70,8 +70,9 @@ export const useBlazorStore = defineStore('blazor', () => {
      * @param serviceName - Name of the service to subscribe
      */
     const subscribeToService = async (serviceName: string): Promise<boolean> => {
+        console.log('on service')
         try {
-            const response = await window.DotNet.invokeMethodAsync(
+            const response = await (window as any).DotNet.invokeMethodAsync(
                 'BlazorMaui.Core',
                 'SubscribeToService',
                 serviceName
