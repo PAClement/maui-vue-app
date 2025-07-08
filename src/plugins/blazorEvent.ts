@@ -51,7 +51,7 @@ export const useBlazorStore = defineStore('blazor', () => {
                     const eventData: EventData = JSON.parse(eventDataJson)
                     console.log('[Blazor Event]', eventData)
 
-                    if (eventData.Service === 'Counter' && eventData.Property === 'Value') {
+                    if (eventData.Service === 'System' && eventData.Property === 'Value') {
                         counterValue.value = Number(eventData.Value)
                     }
 
