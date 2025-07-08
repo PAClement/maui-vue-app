@@ -3,12 +3,12 @@
     <div class="flex items-center gap-3">
       <img src="@/assets/img/package-box.svg" alt="logo" class="w-14 h-14 mr-3">
       <div class="text-gray-500">
-        <h2>Produit {{ props.product ?? 0 }} </h2>
+        <h2>{{ props.product ?? 0 }} </h2>
         <small class="font-bold">Référence : {{ props.refProduct ?? 0 }}</small>
       </div>
     </div>
     <div class="flex items-center gap-5">
-      <span class="font-bold text-xl text-gray-700">{{ props.price ?? 0 }} €</span>
+      <span class="font-bold text-xl text-gray-700">{{ props.price?.toFixed(2) ?? 0 }} €</span>
       <font-awesome-icon icon="trash-can" class="text-2xl text-red-500 cursor-pointer" @click="modalRemoveItem = true"
                          v-if="displayButton"/>
     </div>
