@@ -37,21 +37,25 @@ interface BlazorResult<T = unknown> {
 
 export const useBlazorStore = defineStore('blazor', () => {
     // Example state (Counter)
-    const counterValue = ref<any>('0')
+    const counterValue = ref<number>(0)
     const isConnected = ref<boolean>(false)
-
+    console.log('Blazor store initialized')
     // Derived state
     const doubleCounter = computed(() => counterValue.value * 2)
 
     // Bridge init
     const initializeEventBridge = (): void => {
+        console.log('Initializing Blazor event bridge...')
+
         window.blazorEventBridge = {
             onPropertyChanged: (eventDataJson: string): void => {
+                console.log('[Blazor Event Bridge] Received event data:', eventDataJson)
                 try {
                     const eventData: EventData = JSON.parse(eventDataJson)
                     console.log('[Blazor Event]', eventData)
 
                     if (eventData.Service === 'System' && eventData.Property === 'Value') {
+                        console.log(`Counter value changed: ${eventData.Value}`)
                         counterValue.value = Number(eventData.Value)
                     }
 
@@ -81,8 +85,6 @@ export const useBlazorStore = defineStore('blazor', () => {
             const result: SubscribeResult = JSON.parse(response)
             if (result.Success) {
                 console.log(`✅ Subscribed to ${serviceName}`)
-                console.log(result)
-                counterValue.value = result;
                 return true
             } else {
                 console.error(`❌ Failed to subscribe to ${serviceName}:`, result.Error)
