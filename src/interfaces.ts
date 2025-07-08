@@ -24,20 +24,28 @@ export interface ButtonConfig {
     action: 'next' | 'prev' | 'custom'
 }
 
+/*Interface data */
+export interface Alert {
+    title: string;
+    message: string;
+    type: string;
+    timestamp: Date;
+}
+
 /*Interface Blazor*/
 export interface EventData {
-    Service: string
-    Property: string
-    Value: unknown
+    service: string
+    property: string
+    value: unknown
 }
 
 export interface SubscribeResult {
-    Success: boolean
-    Error?: string
+    success: boolean
+    error?: string
 }
 
 export interface BlazorInitResult {
-    isAvailable: boolean;
+    is_available: boolean;
     version?: string;
     error?: string;
 }
