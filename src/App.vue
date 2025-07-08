@@ -7,47 +7,45 @@
 </template>
 
 <script setup lang="ts">
-
 import Loader from "@/tools/Loader.vue";
 import {ref, onMounted} from "vue";
-import blazorInit, { type BlazorInitResult } from '@/plugins/blazorInit';
+import blazorInit, {type BlazorInitResult} from '@/plugins/blazorInit';
 
 const isLoading = ref(true);
 const loadingMessage = ref('Initialisation de l\'application...');
 
-const blazorError = ref<string | null>(null);
+const initializeBlazor = (): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result: BlazorInitResult = await blazorInit.checkBlazorAvailability();
 
-const initializeBlazor = async (): Promise<void> => {
-  try {
-    blazorError.value = null;
-    loadingMessage.value = 'Vérification de Blazor...';
-
-    const result: BlazorInitResult = await blazorInit.checkBlazorAvailability();
-
-    if (result.isAvailable) {
-      console.log(`Blazor ${result.version} est disponible et prêt`);
-      loadingMessage.value = 'Blazor initialisé avec succès';
-
-      // Subscribe to Blazor events
-
-
-      setTimeout(() => {
-        isLoading.value = false;
-      }, 500);
-    } else {
-      console.error('Blazor non disponible:', result.error);
-      blazorError.value = result.error || 'Erreur inconnue lors de l\'initialisation de Blazor';
-      isLoading.value = false;
+      if (result.isAvailable) {
+        console.log(`Blazor ${result.version} est disponible et prêt`);
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      } else {
+        console.error('Blazor non disponible:', result.error);
+        reject(new Error(result.error || 'Blazor non disponible'));
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'initialisation:', error);
+      reject(error);
     }
-  } catch (error) {
-    console.error('Erreur lors de l\'initialisation:', error);
-    blazorError.value = error instanceof Error ? error.message : 'Erreur inconnue';
-    isLoading.value = false;
-  }
+  });
 };
 
 onMounted(() => {
-  initializeBlazor();
+  initializeBlazor()
+      .then(async () => {
+        blazor.initializeEventBridge();
+        await blazor.subscribeToService('System');
+
+        isLoading.value = false;
+      })
+      .catch((err) => {
+        console.error('Échec de l’initialisation de Blazor:', err);
+      });
 });
 
 </script>
