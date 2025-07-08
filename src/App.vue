@@ -44,6 +44,7 @@ onMounted(() => {
       .then(async () => {
         store.initializeEventBridge();
         await store.subscribeToService('System');
+        await store.subscribeToService('CustomerOrder');
 
         isLoading.value = false;
       })
@@ -56,6 +57,7 @@ onMounted(() => {
 
 watch(() => store.alert, (msg) => {
   if (msg) {
+    //toast message
     console.log(msg)
   }
 })
