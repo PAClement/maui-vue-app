@@ -1,13 +1,11 @@
 <template>
-  <button @click="addProduct">ADD PRODUCT</button>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
       <div class="flex-[1]">
         <div class="flex items-center justify-between mb-3 h-full w-full ">
           <div class="flex-[3]">
-            <RouterLink to="/">
-              <Button text="Annuler le panier" iconSide="left" icon="xmark" iconColor="text-red-500"/>
-            </RouterLink>
+            <Button @click="modalCancelCart = true" text="Annuler le panier" iconSide="left" icon="xmark"
+                    iconColor="text-red-500"/>
           </div>
           <div class="flex-[3] flex justify-center">
             <img src="@/assets/img/logo.svg" alt="logo">
@@ -23,12 +21,13 @@
           <div class="flex-[9]">
             <div class="flex items-center justify-between">
               <span class="text-3xl font-bold text-gray-500">Votre Panier</span>
-              <span class="text-lg font-bold text-gray-500">{{store.customerBasketInformation.totalBasketQuantity}} ARTICLES</span>
+              <span class="text-lg font-bold text-gray-500">{{ store.customerBasketInformation.totalBasketQuantity }} ARTICLES</span>
             </div>
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex flex-col gap-3">
               <div v-for="product in store.products">
-                <Article :product="product.Name" :refProduct="product.InternalRef ?? ''" :price="product.Price" :displayButton="currentStep === 'cart'"/>
+                <Article :product="product.Name" :refProduct="product.InternalRef ?? ''" :price="product.Price"
+                         :displayButton="currentStep === 'cart'"/>
               </div>
             </div>
           </div>
@@ -36,7 +35,10 @@
             <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
             <div class="flex items-center justify-between">
               <span class="text-3xl font-bold text-gray-500">Total</span>
-              <span class="text-lg font-bold text-gray-500">{{store.customerBasketInformation.totalBasketAmount?.toFixed(2)}} €</span>
+              <span
+                  class="text-lg font-bold text-gray-500">{{
+                  store.customerBasketInformation.totalBasketAmount?.toFixed(2)
+                }} €</span>
             </div>
           </div>
         </div>
@@ -69,6 +71,29 @@
       </div>
     </Dialog>
   </TransitionRoot>
+  <TransitionRoot appear :show="modalCancelCart" as="template">
+    <Dialog as="div" class="relative z-50" @close="modalCancelCart = false">
+      <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
+      <div class="fixed inset-0 flex items-center justify-center p-4">
+        <DialogPanel
+            class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
+          <div class="flex flex-col justify-center items-center gap-5">
+            <font-awesome-icon icon="xmark" class="text-6xl text-red-500 cursor-pointer"/>
+            <h2 class="text-gray-500 text-center">
+              <span class="font-bold text-lg">Voulez-vous supprimer votre panier ?</span>
+            </h2>
+            <Loader v-if="loaderDeleteCart"/>
+            <div class="flex gap-5" v-else>
+              <Button @click="modalCancelCart = false" text="Annuler"/>
+              <Button @click="cancelCart"
+                      buttonClass="bg-red-500 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer"
+                      text="Confirmer"/>
+            </div>
+          </div>
+        </DialogPanel>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script setup lang="ts">
@@ -83,9 +108,14 @@ import Loyalty from "@/components/StepSideCheckout/Loyalty.vue";
 import {ButtonConfig} from "@/interfaces";
 import PaymentMethod from "@/components/StepSideCheckout/PaymentMethod.vue";
 import {useBlazorStore} from "@/plugins/blazorEvent";
-import {BlazorBridge} from '@/plugins/blazorBridge';
+import {BlazorBridge} from "@/plugins/blazorBridge";
+import Loader from "@/tools/Loader.vue";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const modalCancelCart = ref(false);
 const modalAskHelp = ref(false);
+const loaderDeleteCart = ref(false);
 const store = useBlazorStore();
 
 const steps = ['cart', 'bag', 'loyalty', 'paymentMethod'] as const;
@@ -98,11 +128,6 @@ const stepComponentMap = {
   loyalty: Loyalty,
   paymentMethod: PaymentMethod
 };
-
-const addProduct = async () => {
-  console.log('add product')
-  await BlazorBridge.call('CustomerOrder', 'AddProduct');
-}
 
 const currentComponent = computed(() => stepComponentMap[currentStep.value]);
 
@@ -167,6 +192,19 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
     iconSide: 'left',
     action: 'prev',
   },
+}
+
+const cancelCart = async () => {
+  loaderDeleteCart.value = true;
+
+  return BlazorBridge.call('CustomerOrder', 'AddProduct').then((res) => {
+    setTimeout(() => {
+      modalCancelCart.value = false;
+      router.push('/');
+    }, 2000);
+  }).catch((err) => {
+    loaderDeleteCart.value = false;
+  });
 }
 </script>
 
