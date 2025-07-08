@@ -1,25 +1,29 @@
 <template>
-  <div v-if="isLoading">
-    <p>{{ loadingMessage }}</p>
-    <Loader/>
+  <div class="h-screen flex flex-col items-center justify-center space-y-4" v-if="isLoading">
+    <Loader />
+    <p class="text-gray-500 text-lg">{{ loadingMessage }}</p>
   </div>
   <RouterView v-else/>
 </template>
 
 <script setup lang="ts">
 import Loader from "@/tools/Loader.vue";
-import {ref, onMounted} from "vue";
-import blazorInit, {type BlazorInitResult} from '@/plugins/blazorInit';
+import {ref, onMounted, watch} from "vue";
+import blazorInit from '@/plugins/blazorInit';
+
+import {useBlazorStore} from "@/plugins/blazorEvent";
+import {BlazorInitResult} from "@/interfaces";
 
 const isLoading = ref(true);
-const loadingMessage = ref('Initialisation de l\'application...');
+const loadingMessage = ref('Initialisation de la borne...');
+const store = useBlazorStore()
 
 const initializeBlazor = (): Promise<void> => {
   return new Promise(async (resolve, reject) => {
     try {
       const result: BlazorInitResult = await blazorInit.checkBlazorAvailability();
 
-      if (result.isAvailable) {
+      if (result.is_available) {
         console.log(`Blazor ${result.version} est disponible et prêt`);
         setTimeout(() => {
           resolve();
@@ -38,14 +42,22 @@ const initializeBlazor = (): Promise<void> => {
 onMounted(() => {
   initializeBlazor()
       .then(async () => {
-        blazor.initializeEventBridge();
-        await blazor.subscribeToService('System');
+        store.initializeEventBridge();
+        await store.subscribeToService('System');
 
         isLoading.value = false;
       })
       .catch((err) => {
+        isLoading.value = false;
+
         console.error('Échec de l’initialisation de Blazor:', err);
       });
 });
+
+watch(() => store.alert, (msg) => {
+  if (msg) {
+    console.log(msg)
+  }
+})
 
 </script>
