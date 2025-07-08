@@ -37,7 +37,7 @@ interface BlazorResult<T = unknown> {
 
 export const useBlazorStore = defineStore('blazor', () => {
     // Example state (Counter)
-    const counterValue = ref<number>(0)
+    const counterValue = ref<any>('0')
     const isConnected = ref<boolean>(false)
 
     // Derived state
@@ -82,6 +82,7 @@ export const useBlazorStore = defineStore('blazor', () => {
             if (result.Success) {
                 console.log(`✅ Subscribed to ${serviceName}`)
                 console.log(result)
+                counterValue.value = result;
                 return true
             } else {
                 console.error(`❌ Failed to subscribe to ${serviceName}:`, result.Error)

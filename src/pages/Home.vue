@@ -7,6 +7,7 @@
     <button @click="setValue">Set Value to 100</button>
 
     <pre>{{ result }}</pre>
+    <pre>{{blazor.counterValue}}</pre>
   </div>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
@@ -99,6 +100,7 @@ const handleProduct = (payload: any) => {
 };
 
 const result = ref();
+const blazor = useBlazorStore();
 
 type Product = {
   id: number;
@@ -112,7 +114,6 @@ const increment = async () => {
   await BlazorBridge.call('System', 'Increment');
 }
 const setValue = async () => {
-  const blazor = useBlazorStore()
   blazor.initializeEventBridge()
   await blazor.subscribeToService('System')
 }
