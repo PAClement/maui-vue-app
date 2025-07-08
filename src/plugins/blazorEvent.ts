@@ -54,9 +54,17 @@ export const useBlazorStore = defineStore('blazor', () => {
                     const eventData: EventData = JSON.parse(eventDataJson)
                     console.log('[Blazor Event]', eventData)
 
-                    if (eventData.Service === 'System' && eventData.Property === 'Value') {
-                        console.log(`Counter value changed: ${eventData.Value}`)
-                        counterValue.value = Number(eventData.Value)
+                    if (eventData.Service === 'System') {
+                        switch (eventData.Property){
+                            case 'Value':
+                                console.log(`Counter value changed: ${eventData.Value}`)
+                                counterValue.value = Number(eventData.Value)
+                                break;
+                            case 'Alert':
+                                console.log(`Alert from Blazor: ${eventData.Value}`)
+                                break;
+                        }
+
                     }
 
                     // Tu peux ajouter d'autres cas ici
