@@ -18,10 +18,10 @@
         </div>
       </div>
       <div class="flex-[9] flex justify-between flex-wrap gap-3">
-        <div class="flex-[7] flex flex-col bg-white shadow-lg rounded-lg p-3">
+        <div class="flex-[6] flex flex-col bg-white shadow-lg rounded-lg p-3">
           <Basket :currentStep="currentStep"/>
         </div>
-        <div class="flex-[3] gap-3 flex flex-col justify-between">
+        <div class="flex-[4] gap-3 flex flex-col justify-between">
           <div class="flex-[9] bg-white shadow-lg rounded-lg p-3">
             <component :is="currentComponent" @next="nextStep" @showButtonCancelCart="toggleButtonModalCancelCart"/>
           </div>
