@@ -25,9 +25,9 @@
           <div class="flex-[9] bg-white shadow-lg rounded-lg p-3">
             <component :is="currentComponent" @next="nextStep" @showButtonCancelCart="toggleButtonModalCancelCart"/>
           </div>
-          <div v-show="(globalButton.show ?? true) && showGlobalButton" class="flex-[1] bg-white shadow-lg rounded-lg">
-            <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
-              ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-2xl h-full w-full'"
+          <div v-show="(globalButton.show ?? true) && showGlobalButton" class="flex-[1] shadow-lg rounded-lg">
+            <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text"
+                    :background-color="globalButton.bgColor" custom-class="h-full w-full" text-color="text-white"
                     :iconSide="globalButton.iconSide" :icon="globalButton.icon" :iconColor="globalButton.iconColor"/>
           </div>
         </div>
@@ -64,8 +64,7 @@
             <Loader v-if="loaderDeleteCart"/>
             <div class="flex gap-5" v-else>
               <Button @click="modalCancelCart = false" text="Annuler"/>
-              <Button @click="cancelCart"
-                      buttonClass="bg-red-500 shadow-md rounded-lg px-4 py-2 text-md font-bold text-white cursor-pointer"
+              <Button @click="cancelCart" background-color="bg-red-500" text-color="text-white"
                       text="Confirmer"/>
             </div>
           </div>
