@@ -22,6 +22,7 @@ export interface ButtonConfig {
     iconSide?: string
     disabled?: boolean
     action: 'next' | 'prev' | 'custom'
+    show?: boolean,
 }
 
 /*Interface data */
