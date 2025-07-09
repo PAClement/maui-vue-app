@@ -4,7 +4,8 @@
       <div class="flex-[1]">
         <div class="flex items-center justify-between mb-3 h-full w-full ">
           <div class="flex-[3]">
-            <Button @click="modalCancelCart = true" text="Annuler le panier" iconSide="left" icon="xmark"
+            <Button v-show="showButtonModalCancelCart" @click="modalCancelCart = true" text="Annuler le panier"
+                    iconSide="left" icon="xmark"
                     iconColor="text-red-500"/>
           </div>
           <div class="flex-[3] flex justify-center">
@@ -22,7 +23,7 @@
         </div>
         <div class="flex-[3] gap-3 flex flex-col justify-between">
           <div class="flex-[9] bg-white shadow-lg rounded-lg p-3">
-            <component :is="currentComponent" @next="nextStep"/>
+            <component :is="currentComponent" @next="nextStep" @showButtonCancelCart="toggleButtonModalCancelCart"/>
           </div>
           <div v-show="globalButton.show ?? true" class="flex-[1] bg-white shadow-lg rounded-lg">
             <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
@@ -97,6 +98,7 @@ const router = useRouter();
 const modalCancelCart = ref(false);
 const modalAskHelp = ref(false);
 const loaderDeleteCart = ref(false);
+const showButtonModalCancelCart = ref(true);
 
 const steps = ['cart', 'bag', 'loyalty', 'paymentMethod', 'payment', 'ticket'] as const;
 type Step = typeof steps[number];
@@ -137,6 +139,10 @@ const handleAction = () => {
 
       break;
   }
+}
+
+const toggleButtonModalCancelCart = (show: boolean) => {
+  showButtonModalCancelCart.value = show
 }
 
 const globalButton = computed(() => buttonConfigMap[currentStep.value]);
