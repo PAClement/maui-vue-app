@@ -1,50 +1,15 @@
 <template>
   <div class="flex flex-col items-center justify-around h-full py-20">
-    <img src="@/assets/img/tpe.png" alt="tpe" class="w-40 h-40 mb-8"/>
-    <Loader/>
-    <h2 class="text-2xl font-bold text-gray-500 text-center">Suivez les instructions <br> sur la borne de paiement...
-    </h2>
+    <h2 class="text-2xl font-bold text-gray-500 text-center">Choisissez une methode <br> de paiement</h2>
+    <div class="flex items-stretch flex-wrap justify-around gap-5">
+      <Button @click="$emit('next')" text="Carte de crédit" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
+            gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="top"
+              icon="credit-card" iconColor="text-white"/>
+    </div>
   </div>
-
-  <TransitionRoot appear :show="isVisible" as="template">
-    <Dialog as="div" class="relative z-50" @close="isVisible = false">
-      <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
-      <div class="fixed inset-0 flex items-center justify-center p-4">
-        <DialogPanel
-            class="transform overflow-hidden rounded-2xl bg-white p-6 text-center shadow-xl transition-all w-full max-w-md"
-        >
-          <div v-if="step === 'success'" class="flex flex-col items-center space-y-4">
-            <font-awesome-icon icon="warning" class="text-6xl text-red-500 cursor-pointer"/>
-            <h2 class="text-xl font-bold text-gray-800">Paiement effectué avec succès</h2>
-          </div>
-
-          <div v-else-if="step === 'validating'" class="flex flex-col items-center space-y-4">
-            <Loader/>
-            <p class="text-gray-700 text-lg">Validation de votre commande...</p>
-          </div>
-        </DialogPanel>
-      </div>
-    </Dialog>
-  </TransitionRoot>
 </template>
 
 <script setup lang="ts">
-import Loader from "@/tools/Loader.vue";
-import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
-import {ref, onMounted} from "vue";
 
-const isVisible = ref(false);
-const step = ref<'success' | 'validating'>('success');
-
-
-const requestPayment = () => {
-  isVisible.value = true;
-};
-
-onMounted(() => {
-  setTimeout(() => {
-    requestPayment();
-  }, 2000)
-});
-
+import Button from "@/tools/Button.vue";
 </script>
