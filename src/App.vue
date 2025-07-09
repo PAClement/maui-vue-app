@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col items-center justify-center space-y-4" v-if="isLoading">
-    <Loader />
+    <Loader/>
     <p class="text-gray-500 text-lg">{{ loadingMessage }}</p>
   </div>
   <RouterView v-else/>
@@ -13,6 +13,7 @@ import blazorInit from '@/plugins/blazorInit';
 
 import {useBlazorStore} from "@/plugins/blazorEvent";
 import {BlazorInitResult} from "@/interfaces";
+import {BlazorBridge} from "@/plugins/blazorBridge";
 
 const isLoading = ref(true);
 const loadingMessage = ref('Initialisation de la borne...');
@@ -45,6 +46,7 @@ onMounted(() => {
         store.initializeEventBridge();
         await store.subscribeToService('System');
         await store.subscribeToService('CustomerOrder');
+        await BlazorBridge.call('Barcode', 'StartScanning');
 
         isLoading.value = false;
       })
