@@ -86,7 +86,7 @@ const flags_list = computed(() => {
 });
 
 const getFlagSrc = (flag: string) => {
-  return new URL(`./assets/img/flags/${flag}.png`, import.meta.url).href
+  return new URL(`../assets/img/flags/${flag}.png`, import.meta.url).href
 }
 
 watch(() => store.goToPageCheckout, (val) => {
