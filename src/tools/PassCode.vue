@@ -13,7 +13,7 @@
       C
     </button>
     <button @click="addDigit(0)"
-            class="bg-primary-500 text-white text-xl font-bold py-3 rounded-lg shadow-md  transition-all duration-150 ease-in-outcursor-pointer active:shadow-sm active:translate-y-0 active:scale-95">
+            class="bg-primary-500 text-white text-xl font-bold py-3 rounded-lg shadow-md  transition-all duration-150 ease-in-out cursor-pointer active:shadow-sm active:translate-y-0 active:scale-95">
       0
     </button>
     <button @click="removeLast"
