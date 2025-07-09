@@ -74,7 +74,7 @@ const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 const router = useRouter();
 const isOpen = ref(false);
 const modalAskHelp = ref(false);
-const store = useBlazorStore()
+const store = useBlazorStore();
 
 const currentFlag = ref('fr');
 
@@ -88,7 +88,7 @@ const getFlagSrc = (flag: string) => {
 
 watch(() => store.goToPageCheckout, (val) => {
   if (val) {
-    router.push('/');
+    router.push('/checkout');
   }
 });
 
