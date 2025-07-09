@@ -51,6 +51,7 @@ onMounted(() => {
         store.initializeEventBridge();
         await store.subscribeToService('System');
         await store.subscribeToService('CustomerOrder');
+        await store.subscribeToService('Barcode');
         await BlazorBridge.call('Barcode', 'StartScanning');
 
         isLoading.value = false;
