@@ -60,17 +60,20 @@
       </div>
     </Dialog>
   </TransitionRoot>
+  <ProductNotFound :displayModal="modalProductNotFound" @close-modal="modalProductNotFound = false" />
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
+import ProductNotFound from "@/components/ProductNotFound.vue";
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
 const isOpen = ref(false);
 const modalAskHelp = ref(false);
+const modalProductNotFound = ref(true);
 
 const currentFlag = ref('fr');
 
