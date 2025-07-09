@@ -25,7 +25,7 @@
           <div class="flex-[9] bg-white shadow-lg rounded-lg p-3">
             <component :is="currentComponent" @next="nextStep" @showButtonCancelCart="toggleButtonModalCancelCart"/>
           </div>
-          <div v-show="globalButton.show ?? true" class="flex-[1] bg-white shadow-lg rounded-lg">
+          <div v-show="(globalButton.show ?? true) && showGlobalButton" class="flex-[1] bg-white shadow-lg rounded-lg">
             <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
               ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-2xl h-full w-full'"
                     :iconSide="globalButton.iconSide" :icon="globalButton.icon" :iconColor="globalButton.iconColor"/>
@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 
-import {ref, computed} from "vue";
+import {ref, computed, onMounted, watch} from "vue";
 import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
 
 import Button from "@/tools/Button.vue";
@@ -93,12 +93,15 @@ import {BlazorBridge} from "@/plugins/blazorBridge";
 import Loader from "@/tools/Loader.vue";
 import {useRouter} from 'vue-router';
 import Basket from "@/components/Basket.vue";
+import {useBlazorStore} from "@/plugins/blazorEvent";
 
 const router = useRouter();
 const modalCancelCart = ref(false);
 const modalAskHelp = ref(false);
 const loaderDeleteCart = ref(false);
 const showButtonModalCancelCart = ref(true);
+const showGlobalButton = ref(false);
+const store = useBlazorStore();
 
 const steps = ['cart', 'bag', 'loyalty', 'paymentMethod', 'payment', 'ticket'] as const;
 type Step = typeof steps[number];
@@ -208,11 +211,21 @@ const cancelCart = async () => {
     setTimeout(() => {
       modalCancelCart.value = false;
       router.push('/');
-    }, 2000);
+    }, 1000);
   }).catch((err) => {
     loaderDeleteCart.value = false;
   });
 }
+
+onMounted(() => {
+  console.log(store.products)
+  showGlobalButton.value = !(store.products === null || store.products.length === 0);
+});
+
+watch(() => store.products, (val) => {
+  showGlobalButton.value = (val && val?.length > 0) ?? false;
+})
+
 </script>
 
 <style></style>
