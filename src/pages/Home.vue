@@ -1,10 +1,10 @@
 <template>
   <section class="h-screen bg-white flex flex-col p-3">
     <div class="flex-1 flex flex-col gap-3">
-      <div class="flex-[3] flex justify-center items-center">
+      <div class="flex-[2] flex justify-center items-center">
         <img src="@/assets/img/logo.svg" alt="logo" class="w-40 h-40">
       </div>
-      <div class="flex-[6] flex justify-center items-center">
+      <div class="flex-[8] flex justify-center items-center">
         <div class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full">
           <h2 class="text-center text-gray-500 font-bold text-lg">Scannez un item<br> pour commencer</h2>
           <RouterLink to="/checkout">
@@ -12,7 +12,7 @@
           </RouterLink>
         </div>
       </div>
-      <div class="flex-[1] flex flex-col justify-center items-center gap-3">
+      <div class="flex-[2] flex flex-col justify-center items-center gap-3">
         <button class="cursor-pointer" @click="isOpen = true">
           <img src="@/assets/img/flags/fr.png" alt="logo" class="w-16 h-16">
         </button>
@@ -60,20 +60,17 @@
       </div>
     </Dialog>
   </TransitionRoot>
-  <ProductNotFound :displayModal="modalProductNotFound" @close-modal="modalProductNotFound = false" />
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
-import ProductNotFound from "@/components/ProductNotFound.vue";
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
 const isOpen = ref(false);
 const modalAskHelp = ref(false);
-const modalProductNotFound = ref(true);
 
 const currentFlag = ref('fr');
 
