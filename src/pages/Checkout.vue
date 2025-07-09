@@ -218,7 +218,6 @@ const cancelCart = async () => {
 }
 
 onMounted(() => {
-  console.log(store.products)
   showGlobalButton.value = !(store.products === null || store.products.length === 0);
 });
 
