@@ -8,7 +8,7 @@
       <Button @click="modalSMS = true" text="Par SMS" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
                 gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
               icon="mobile" iconColor="text-white"/>
-      <Button @click="modalPrint = true" text="Imprimer" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
+      <Button @click="modalPrint = true" text="Imprimer le ticket" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
                 gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
               icon="print" iconColor="text-white"/>
     </div>
