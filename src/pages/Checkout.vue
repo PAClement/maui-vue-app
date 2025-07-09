@@ -18,35 +18,13 @@
       </div>
       <div class="flex-[9] flex justify-between flex-wrap gap-3">
         <div class="flex-[7] flex flex-col bg-white shadow-lg rounded-lg p-3">
-          <div class="flex-[9]">
-            <div class="flex items-center justify-between">
-              <span class="text-3xl font-bold text-gray-500">Votre Panier</span>
-              <span class="text-lg font-bold text-gray-500">{{ store.customerBasketInformation.totalBasketQuantity }} ARTICLES</span>
-            </div>
-            <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
-            <div class="flex flex-col gap-3">
-              <div v-for="product in store.products">
-                <Article :product="product.Name" :refProduct="product.InternalRef ?? ''" :price="product.Price"
-                         :displayButton="currentStep === 'cart'"/>
-              </div>
-            </div>
-          </div>
-          <div class="flex-[1]">
-            <hr class="h-0.5 mt-3 mb-5 bg-gray-400 border-0 rounded">
-            <div class="flex items-center justify-between">
-              <span class="text-3xl font-bold text-gray-500">Total</span>
-              <span
-                  class="text-lg font-bold text-gray-500">{{
-                  store.customerBasketInformation.totalBasketAmount?.toFixed(2)
-                }} €</span>
-            </div>
-          </div>
+          <Basket :currentStep="currentStep"/>
         </div>
         <div class="flex-[3] gap-3 flex flex-col justify-between">
           <div class="flex-[9] bg-white shadow-lg rounded-lg p-3">
             <component :is="currentComponent" @next="nextStep"/>
           </div>
-          <div class="flex-[1] bg-white shadow-lg rounded-lg">
+          <div v-show="globalButton.show ?? true" class="flex-[1] bg-white shadow-lg rounded-lg">
             <Button @click="handleAction" :disabled="globalButton.disabled" :text="globalButton.text" :buttonClass="globalButton.bgColor +
               ' rounded-lg flex items-center gap-16 px-10 py-2 font-bold text-white text-2xl h-full w-full'"
                     :iconSide="globalButton.iconSide" :icon="globalButton.icon" :iconColor="globalButton.iconColor"/>
@@ -100,25 +78,27 @@
 
 import {ref, computed} from "vue";
 import {Dialog, DialogPanel, TransitionRoot} from "@headlessui/vue";
+
 import Button from "@/tools/Button.vue";
-import Article from "@/components/Article.vue";
 import Bag from "@/components/StepSideCheckout/Bag.vue";
 import Cart from "@/components/StepSideCheckout/Cart.vue";
 import Loyalty from "@/components/StepSideCheckout/Loyalty.vue";
-import {ButtonConfig} from "@/interfaces";
 import PaymentMethod from "@/components/StepSideCheckout/PaymentMethod.vue";
-import {useBlazorStore} from "@/plugins/blazorEvent";
+import Ticket from "@/components/StepSideCheckout/Ticket.vue";
+import Payment from "@/components/StepSideCheckout/Payment.vue";
+
+import {ButtonConfig} from "@/interfaces";
 import {BlazorBridge} from "@/plugins/blazorBridge";
 import Loader from "@/tools/Loader.vue";
-import { useRouter } from 'vue-router';
+import {useRouter} from 'vue-router';
+import Basket from "@/components/Basket.vue";
 
 const router = useRouter();
 const modalCancelCart = ref(false);
 const modalAskHelp = ref(false);
 const loaderDeleteCart = ref(false);
-const store = useBlazorStore();
 
-const steps = ['cart', 'bag', 'loyalty', 'paymentMethod'] as const;
+const steps = ['cart', 'bag', 'loyalty', 'paymentMethod', 'payment', 'ticket'] as const;
 type Step = typeof steps[number];
 
 const currentStep = ref<Step>('cart');
@@ -126,7 +106,9 @@ const stepComponentMap = {
   cart: Cart,
   bag: Bag,
   loyalty: Loyalty,
-  paymentMethod: PaymentMethod
+  paymentMethod: PaymentMethod,
+  payment: Payment,
+  ticket: Ticket,
 };
 
 const currentComponent = computed(() => stepComponentMap[currentStep.value]);
@@ -185,12 +167,30 @@ const buttonConfigMap: Record<Step, ButtonConfig> = {
     action: 'prev',
   },
   paymentMethod: {
+    text: 'Retour',
+    icon: 'arrow-left',
+    bgColor: 'bg-red-500',
+    iconColor: 'text-white',
+    iconSide: 'left',
+    action: 'prev',
+  },
+  payment: {
     text: 'Annuler la transaction',
     icon: 'arrow-left',
     bgColor: 'bg-red-500',
     iconColor: 'text-white',
     iconSide: 'left',
     action: 'prev',
+    show: false,
+  },
+  ticket: {
+    text: 'Terminer',
+    icon: 'check',
+    bgColor: 'bg-green-500',
+    iconColor: 'text-white',
+    iconSide: 'left',
+    action: 'custom',
+    show: false,
   },
 }
 
