@@ -4,7 +4,7 @@
       <div class="flex-[3] flex justify-center items-center">
         <img src="@/assets/img/logo.svg" alt="logo" class="w-40 h-40">
       </div>
-      <div class="flex-[6] flex justify-center items-baseline">
+      <div class="flex-[6] flex justify-center items-center">
         <div class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full">
           <h2 class="text-center text-gray-500 font-bold text-lg">Scannez un item<br> pour commencer</h2>
           <RouterLink to="/checkout">
