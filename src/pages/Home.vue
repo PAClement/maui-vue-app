@@ -10,7 +10,7 @@
             class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full hover:cursor-pointer"
         >
           <h2 class="text-center text-gray-500 font-bold text-lg">
-            Scannez un item<br> pour commencer
+            Scannez un article<br> pour commencer
           </h2>
           <img src="@/assets/img/barcode.svg" alt="logo" class="w-40 h-40" />
         </RouterLink>
