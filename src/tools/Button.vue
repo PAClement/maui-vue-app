@@ -2,7 +2,7 @@
   <button
       :disabled="props.disabled"
       :class="[
-      props.buttonClass || 'bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 outline-0',
+      props.buttonClass || 'bg-white shadow-md rounded-lg px-4 py-2 text-lg font-bold text-gray-500 outline-0 inset-shadow-2xs',
       props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-lg transition-shadow'
     ]"
   >
