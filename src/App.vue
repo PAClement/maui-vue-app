@@ -22,7 +22,7 @@ import ProductNotFound from "@/components/ProductNotFound.vue";
 const isLoading = ref(true);
 const loadingMessage = ref('Initialisation de la borne...');
 const store = useBlazorStore()
-const modalProductNotFound = ref(true);
+const modalProductNotFound = ref(false);
 
 const initializeBlazor = (): Promise<void> => {
   return new Promise(async (resolve, reject) => {
