@@ -89,6 +89,7 @@ const getFlagSrc = (flag: string) => {
 watch(() => store.goToPageCheckout, (val) => {
   if (val) {
     router.push('/checkout');
+    store.goToPageCheckout = false;
   }
 });
 
