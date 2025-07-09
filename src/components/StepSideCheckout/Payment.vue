@@ -7,8 +7,8 @@
   </div>
   <div v-else class="flex flex-col items-center justify-center h-full py-20">
     <Loader/>
-    <p class="text-gray-700 text-lg" v-if="step === 'validating'">Validation de votre commande...</p>
-    <p class="text-gray-700 text-lg" v-else-if="step === 'success'">Paiement effectué avec succès...</p>
+    <p class="text-gray-700 text-lg text-center" v-if="step === 'validating'">Validation de votre commande...</p>
+    <p class="text-gray-700 text-lg text-center" v-else-if="step === 'success'">Paiement effectué avec succès...</p>
   </div>
 </template>
 
