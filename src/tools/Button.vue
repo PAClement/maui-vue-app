@@ -2,11 +2,14 @@
   <button
       :disabled="props.disabled"
       :class="[
-      'shadow-md rounded-lg px-12 py-4 text-lg font-bold outline-0 inset-shadow-2xs ',
+      'shadow-md rounded-lg px-12 py-4 text-lg font-bold outline-0 inset-shadow-2xs transition-all duration-150 ease-in-out',
       props.backgroundColor,
       props.textColor,
       props.customClass,
-      props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-lg transition-shadow'
+      props.disabled ? 'opacity-50 cursor-not-allowed' : [
+        'cursor-pointer hover:shadow-lg',
+        'active:shadow-sm active:translate-y-0 active:scale-95'
+      ]
     ]"
   >
     <span :class="getFlexClasses()">
