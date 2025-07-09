@@ -1,17 +1,18 @@
 <template>
-  <div class="flex flex-col items-center justify-between h-full py-20 gap-20">
+  <div class="flex flex-col items-center justify-center h-full gap-20">
     <h2 class="text-2xl font-bold text-gray-500">Voulez-vous un ticket ?</h2>
     <div class="flex flex-col items-stretch gap-5 ">
       <Button @click="modalMail = true" text="Par mail" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-              gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="bottom"
+                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
               icon="envelope" iconColor="text-white"/>
       <Button @click="modalSMS = true" text="Par SMS" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-              gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="bottom"
+                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
               icon="mobile" iconColor="text-white"/>
-      <Button @click="modalQRCode = true" text="QR Code" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-              gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="bottom"
-              icon="qrcode" iconColor="text-white"/>
+      <Button @click="modalPrint = true" text="Imprimer" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
+                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+              icon="print" iconColor="text-white"/>
     </div>
+    <img src="@/assets/img/qrcode.svg" alt="logo" class="w-30 h-30">
     <Button @click="$emit('next')" text="Je ne veux pas de ticket" buttonClass="bg-gray-500 shadow-md rounded-lg flex items-center
               gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
             icon="ban" iconColor="text-white"/>
@@ -60,14 +61,14 @@
       </div>
     </Dialog>
   </TransitionRoot>
-  <TransitionRoot appear :show="modalQRCode" as="template">
-    <Dialog as="div" class="relative z-50" @close="modalQRCode = false">
+  <TransitionRoot appear :show="modalPrint" as="template">
+    <Dialog as="div" class="relative z-50" @close="modalPrint = false">
       <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
       <div class="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
           <div class="flex flex-col justify-center items-center gap-5">
-            <h2>QR code</h2>
+            <h2>Print</h2>
           </div>
         </DialogPanel>
       </div>
@@ -82,5 +83,5 @@ import {ref} from "vue";
 
 const modalMail = ref(false);
 const modalSMS = ref(false);
-const modalQRCode = ref(false);
+const modalPrint = ref(false);
 </script>
