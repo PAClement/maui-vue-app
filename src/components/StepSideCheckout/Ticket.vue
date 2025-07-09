@@ -21,7 +21,7 @@
             icon="ban" iconColor="text-white"/>
   </div>
   <TransitionRoot appear :show="modalMail" as="template">
-    <Dialog :initial-focus="null" as="div" class="relative z-50" @close="modalMail = false">
+    <Dialog :initial-focus="buttonMailRef" as="div" class="relative z-50" @close="modalMail = false">
       <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
       <div class="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
@@ -35,12 +35,13 @@
                   required
                   @focusin="toggleKeyboard"
                   @focusout="toggleKeyboard"
-                  class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5"
+                  class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5 text-center"
               />
               <Keyboard v-if="showKeyboard" @key-press="addKey" />
             </div>
             <div class="flex items-center justify-center mt-3">
               <Button
+                  ref="buttonMailRef"
                   text="Envoyer le ticket"
                   buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-xl cursor-pointer"
                   iconSide="left"
@@ -55,7 +56,7 @@
     </Dialog>
   </TransitionRoot>
   <TransitionRoot appear :show="modalSMS" as="template">
-    <Dialog as="div" class="relative z-50" @close="modalSMS = false">
+    <Dialog :initial-focus="buttonSmsRef" as="div" class="relative z-50" @close="modalSMS = false">
       <div class="fixed inset-0 bg-black/30 backdrop-blur-sm"/>
       <div class="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
@@ -68,12 +69,13 @@
                 required
                 readonly
                 v-model="passCode"
-                class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5"
+                class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5 text-center"
             />
             <div class="w-1/2">
               <PassCode @code-update="code => passCode = code"/>
             </div>
             <Button
+                ref="buttonSmsRef"
                 text="Confirmer"
                 buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-2xl cursor-pointer mt-5"
                 iconSide="left"
@@ -98,6 +100,9 @@ import Keyboard from "@/tools/Keyboard.vue";
 const showKeyboard = ref(false);
 const modalMail = ref(false);
 const modalSMS = ref(false);
+
+const buttonMailRef = ref();
+const buttonSmsRef = ref();
 
 const passCode = ref<string>('');
 
