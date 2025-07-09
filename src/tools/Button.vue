@@ -2,7 +2,10 @@
   <button
       :disabled="props.disabled"
       :class="[
-      props.buttonClass || 'bg-white shadow-md rounded-lg px-12 py-4 text-lg font-bold text-gray-500 outline-0 inset-shadow-2xs',
+      'shadow-md rounded-lg px-12 py-4 text-lg font-bold outline-0 inset-shadow-2xs ',
+      props.backgroundColor,
+      props.textColor,
+      props.customClass,
       props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-lg transition-shadow'
     ]"
   >
@@ -18,7 +21,6 @@
             :icon="props.icon"
             :class="[props.iconColor, 'text-2xl']"
         />
-
         <span v-if="props.text">{{ props.text }}</span>
         <font-awesome-icon
             v-if="props.icon && props.iconSide === 'right'"
@@ -35,21 +37,28 @@
   </button>
 </template>
 
-<script setup>
-// Props
+<script setup lang="ts">
 const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
   },
-  buttonClass: {
+  customClass: {
     type: String,
     default: ''
+  },
+  backgroundColor: {
+    type: String,
+    default: 'bg-white'
+  },
+  textColor: {
+    type: String,
+    default: 'text-gray-500'
   },
   iconSide: {
     type: String,
     default: 'left',
-    validator: (value) => ['left', 'right', 'top', 'bottom'].includes(value)
+    validator: (value: string) => ['left', 'right', 'top', 'bottom'].includes(value)
   },
   icon: {
     type: [String, Array],
@@ -65,23 +74,16 @@ const props = defineProps({
   }
 })
 
-// Computed classes pour le conteneur principal
 const getFlexClasses = () => {
-  const baseClasses = ['flex', 'items-center', 'justify-center']
-
-  if (props.iconSide === 'top' || props.iconSide === 'bottom') {
-    return [...baseClasses, 'flex-col', 'gap-2']
-  }
-
-  return [...baseClasses, 'gap-3']
+  const base = ['flex', 'items-center', 'justify-center']
+  return props.iconSide === 'top' || props.iconSide === 'bottom'
+      ? [...base, 'flex-col', 'gap-2']
+      : [...base, 'gap-3']
 }
 
-// Computed classes pour le conteneur de contenu (left/right)
 const getContentClasses = () => {
-  if (props.iconSide === 'top' || props.iconSide === 'bottom') {
-    return ['flex', 'items-center', 'justify-center']
-  }
-
-  return ['flex', 'items-center', 'gap-3']
+  return props.iconSide === 'top' || props.iconSide === 'bottom'
+      ? ['flex', 'items-center', 'justify-center']
+      : ['flex', 'items-center', 'gap-3']
 }
 </script>
