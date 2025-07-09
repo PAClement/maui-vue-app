@@ -22,8 +22,26 @@
       <div class="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel
             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
-          <div class="flex flex-col justify-center items-center gap-5">
-            <h2>Mail</h2>
+          <div class="flex flex-col gap-10">
+            <h2 class="text-2xl font-bold text-center text-gray-500">Ticker par mail</h2>
+            <div>
+              <p class="text-lg text-gray-500 mb-3 text-center">Renseigner votre mail</p>
+              <input
+                  type="text"
+                  required
+                  class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5"
+              />
+            </div>
+            <div class="flex items-center justify-center mt-3">
+              <Button
+                  text="Envoyer le ticket"
+                  buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-xl cursor-pointer"
+                  iconSide="left"
+                  icon="circle-check"
+                  iconColor="text-white"
+                  @click="$emit('next')"
+              />
+            </div>
           </div>
         </DialogPanel>
       </div>
