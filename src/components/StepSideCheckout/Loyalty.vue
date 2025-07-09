@@ -1,14 +1,13 @@
 <template>
   <div class="flex flex-col items-center justify-between h-full py-20">
     <h2 class="text-2xl font-bold text-gray-500">Vous avez un compte de fidélité ?</h2>
-    <img src="@/assets/img/card-box.svg" alt="logo" class="w-30 h-30">
     <div>
-      <Button @click="modalLoyaltyAccount = true" text="Associer mon compte" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-            gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+      <Button @click="modalLoyaltyAccount = true" text="Associer mon compte" background-color="bg-primary-500"
+              text-color="text-white" iconSide="left"
               icon="qrcode" iconColor="text-white"/>
     </div>
-    <Button @click="$emit('next')" text="Non, merci" buttonClass="bg-gray-500 shadow-md rounded-lg flex items-center
-            gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+    <Button @click="$emit('next')" text="Non, merci" background-color="bg-gray-500" text-color="text-white"
+            iconSide="left"
             icon="ban" iconColor="text-white"/>
   </div>
   <TransitionRoot appear :show="modalLoyaltyAccount" as="template">
@@ -43,7 +42,7 @@
           <div class="flex items-center justify-center mt-10">
             <Button
                 text="Valider"
-                buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-2xl cursor-pointer"
+                background-color="bg-green-500" text-color="text-white"
                 iconSide="left"
                 icon="circle-check"
                 iconColor="text-white"

@@ -2,22 +2,22 @@
   <div class="flex flex-col items-center justify-center h-full gap-20">
     <h2 class="text-2xl font-bold text-gray-500">Voulez-vous un ticket ?</h2>
     <div class="flex flex-col items-stretch gap-5 ">
-      <Button @click="modalMail = true" text="Par mail" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+      <Button @click="modalMail = true" text="Par mail" background-color="bg-primary-500" text-color="text-white"
+              iconSide="left"
               icon="envelope" iconColor="text-white"/>
-      <Button @click="modalSMS = true" text="Par SMS" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+      <Button @click="modalSMS = true" text="Par SMS" background-color="bg-primary-500" text-color="text-white"
+              iconSide="left"
               icon="mobile-screen" iconColor="text-white"/>
-      <Button @click="printTicket" text="Imprimer le ticket" buttonClass="bg-primary-500 shadow-md rounded-lg flex items-center
-                gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+      <Button @click="printTicket" text="Imprimer le ticket" background-color="bg-primary-500" text-color="text-white"
+              iconSide="left"
               icon="print" iconColor="text-white"/>
     </div>
     <div class="flex flex-col items-center gap-5">
       <p class="text-gray-500">Scannez le QR Code pour récupérer votre ticket</p>
       <img src="@/assets/img/qrcode.svg" alt="logo" class="w-30 h-30">
     </div>
-    <Button @click="$emit('next')" text="Je ne veux pas de ticket" buttonClass="bg-gray-500 shadow-md rounded-lg flex items-center
-              gap-16 px-12 py-4 font-bold text-white text-xl cursor-pointer " iconSide="left"
+    <Button @click="$emit('next')" text="Je ne veux pas de ticket" background-color="bg-gray-500"
+            text-color="text-white" iconSide="left"
             icon="ban" iconColor="text-white"/>
   </div>
   <TransitionRoot appear :show="modalMail" as="template">
@@ -37,13 +37,13 @@
                   @focusout="toggleKeyboard"
                   class="bg-gray-50 border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 border-2 outline-0 w-full p-2.5 text-center"
               />
-              <Keyboard v-if="showKeyboard" @key-press="addKey" />
+              <Keyboard v-if="showKeyboard" @key-press="addKey"/>
             </div>
             <div class="flex items-center justify-center mt-3">
               <Button
                   ref="buttonMailRef"
                   text="Envoyer le ticket"
-                  buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-xl cursor-pointer"
+                  background-color="bg-green-500" text-color="text-white"
                   iconSide="left"
                   icon="circle-check"
                   iconColor="text-white"
@@ -77,7 +77,7 @@
             <Button
                 ref="buttonSmsRef"
                 text="Confirmer"
-                buttonClass="bg-green-500 shadow-md rounded-lg flex items-center gap-16 px-8 py-3 font-bold text-white text-2xl cursor-pointer mt-5"
+                background-color="bg-green-500" text-color="text-white"
                 iconSide="left"
                 icon="circle-check"
                 iconColor="text-white"
