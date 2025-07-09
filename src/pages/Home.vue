@@ -5,12 +5,15 @@
         <img src="@/assets/img/logo.svg" alt="logo" class="w-40 h-40">
       </div>
       <div class="flex-[8] flex justify-center items-center">
-        <div class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full">
-          <h2 class="text-center text-gray-500 font-bold text-lg">Scannez un item<br> pour commencer</h2>
-          <RouterLink to="/checkout">
-            <img src="@/assets/img/barcode.svg" alt="logo" class="w-40 h-40">
-          </RouterLink>
-        </div>
+        <RouterLink
+            to="/checkout"
+            class="bg-white shadow-lg rounded-lg p-3 flex flex-col items-center gap-8 px-10 py-5 max-w-3xl w-full hover:cursor-pointer"
+        >
+          <h2 class="text-center text-gray-500 font-bold text-lg">
+            Scannez un item<br> pour commencer
+          </h2>
+          <img src="@/assets/img/barcode.svg" alt="logo" class="w-40 h-40" />
+        </RouterLink>
       </div>
       <div class="flex-[2] flex flex-col justify-center items-center gap-3">
         <button class="cursor-pointer" @click="isOpen = true">
