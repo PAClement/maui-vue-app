@@ -27,12 +27,13 @@ import {
     faGift,
     faCrown,
     faEnvelope,
-    faMobile
+    faMobile,
+    faPrint,
 } from '@fortawesome/free-solid-svg-icons'
 import {createPinia} from "pinia";
 
 library.add(faXmark, faWarning, faCartShopping, faTrashCan, faBan, faArrowLeft, faQrcode, faPlus,
-    faCircleCheck, faCreditCard, faGift, faCrown, faEnvelope, faMobile);
+    faCircleCheck, faCreditCard, faGift, faCrown, faEnvelope, faMobile, faPrint);
 
 const pinia = createPinia();
 
