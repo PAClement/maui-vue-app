@@ -46,6 +46,15 @@ export const useBlazorStore = defineStore('store', () => {
                                 break;
                         }
 
+                    } else if (eventData.Service === 'Barcode') {
+                        switch (eventData.Property) {
+                            case 'ProductNotFound':
+                                productNotFound.value = eventData.Value as boolean
+                                break;
+                            case 'GoToPageCheckout':
+                                goToPageCheckout.value = eventData.Value as boolean
+                                break;
+                        }
                     }
                 } catch (error) {
                     console.error('Invalid Blazor event data:', error)
