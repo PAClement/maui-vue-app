@@ -63,14 +63,18 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionRoot} from '@headlessui/vue'
 import Button from "@/tools/Button.vue";
+import {useBlazorStore} from "@/plugins/blazorEvent";
+import {useRouter} from "vue-router";
 
 const flags = ref(['de', 'en', 'es', 'fr', 'it', 'lu', 'pt']);
 
+const router = useRouter();
 const isOpen = ref(false);
 const modalAskHelp = ref(false);
+const store = useBlazorStore()
 
 const currentFlag = ref('fr');
 
@@ -81,6 +85,12 @@ const flags_list = computed(() => {
 const getFlagSrc = (flag: string) => {
   return new URL(`./assets/img/flags/${flag}.png`, import.meta.url).href
 }
+
+watch(() => store.goToPageCheckout, (val) => {
+  if (val) {
+    router.push('/');
+  }
+});
 
 </script>
 
