@@ -4,7 +4,7 @@
       <div class="flex-[1]">
         <div class="flex items-center justify-between mb-3 h-full w-full ">
           <div class="flex-[3]">
-            <Button v-show="showButtonModalCancelCart" @click="modalCancelCart = true" text="Annuler le panier"
+            <Button v-show="showButtonModalCancelCart" @click="modalCancelCart = true" text="Abandonner mon panier"
                     iconSide="left" icon="xmark"
                     iconColor="text-red-500"/>
           </div>
