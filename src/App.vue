@@ -3,7 +3,10 @@
     <Loader/>
     <p class="text-gray-500 text-lg">{{ loadingMessage }}</p>
   </div>
-  <RouterView v-else/>
+  <div v-else>
+    <ProductNotFound :displayModal="modalProductNotFound" @close-modal="modalProductNotFound = false"/>
+    <RouterView/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,10 +17,11 @@ import blazorInit from '@/plugins/blazorInit';
 import {useBlazorStore} from "@/plugins/blazorEvent";
 import {BlazorInitResult} from "@/interfaces";
 import {BlazorBridge} from "@/plugins/blazorBridge";
+import ProductNotFound from "@/components/ProductNotFound.vue";
 
 const isLoading = ref(true);
 const loadingMessage = ref('Initialisation de la borne...');
-const store = useBlazorStore()
+const store = useBlazorStore();
 
 const initializeBlazor = (): Promise<void> => {
   return new Promise(async (resolve, reject) => {
@@ -57,11 +61,14 @@ onMounted(() => {
       });
 });
 
-watch(() => store.alert, (msg) => {
-  if (msg) {
-    //toast message
-    console.log(msg)
+watch(() => store.alert, (val) => {
+  if (val) {
+    console.log('Alert:', val);
   }
-})
+});
+
+watch(() => store.productNotFound, (val) => {
+  modalProductNotFound.value = val;
+});
 
 </script>
