@@ -16,7 +16,7 @@
 import Loader from "@/tools/Loader.vue";
 import {ref, onMounted} from "vue";
 
-const emit = defineEmits(['next']);
+const emit = defineEmits(['next', 'showButtonCancelCart']);
 const step = ref<'waiting' | 'success' | 'validating'>('waiting');
 
 
@@ -35,6 +35,7 @@ const orderValidation = () => {
 };
 
 onMounted(() => {
+  emit('showButtonCancelCart', false);
   setTimeout(() => {
     paymentSuccess();
   }, 2000)
