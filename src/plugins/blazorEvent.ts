@@ -7,6 +7,7 @@ export const useBlazorStore = defineStore('store', () => {
     const alert = ref<Alert | null>(null);
     const productNotFound = ref<boolean>(false);
     const products = ref<Product[] | null>(null);
+    const goToPageCheckout = ref<boolean>(false);
     const customerBasketInformation = ref<CustomerBasketInformation>({
         totalBasketAmount: 0,
         totalBasketQuantity: 0
@@ -26,6 +27,9 @@ export const useBlazorStore = defineStore('store', () => {
                                 break;
                             case 'ProductNotFound':
                                 productNotFound.value = eventData.Value as boolean
+                                break;
+                            case 'GoToPageCheckout':
+                                goToPageCheckout.value = eventData.Value as boolean
                                 break;
                         }
 
@@ -80,6 +84,7 @@ export const useBlazorStore = defineStore('store', () => {
 
     return {
         products,
+        goToPageCheckout,
         customerBasketInformation,
         productNotFound,
         alert,
